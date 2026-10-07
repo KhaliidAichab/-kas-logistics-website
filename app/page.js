@@ -1,18 +1,255 @@
 "use client";
-import {useState} from 'react';
-const services=[['01','Air Freight','General cargo, courier, dangerous goods, valuables, pharma and perishables.','✈'],['02','Sea Freight','FCL, LCL, reefer, hazardous, RO-RO, OOG and project cargo.','⚓'],['03','Land Freight','FTL, LTL, oversized goods, ADR and temperature-controlled transport.','▰'],['04','Warehousing','Storage, labeling, packing, inventory, distribution and cross docking.','▦'],['05','Project Logistics','Chartering, multimodal, break bulk, RO-RO and complex cargo solutions.','◈'],['06','Digital Logistics','Live tracking, digital quotes, CRM, operations and automated invoicing.','⌁']];
-const industries=['Industrial & Manufacturing','E-Commerce','Healthcare & Pharma','Automotive','Energy & Projects','Retail & Consumer','Perishables','Special Cargo'];
-const network=['Saudi Arabia','UAE','Kenya','South Africa','Namibia','Sudan','Rwanda'];
-export default function Home(){const [track,setTrack]=useState('');const [sent,setSent]=useState(false);const [menu,setMenu]=useState(false);return <main>
-<header className="header"><a className="logo" href="#top"><img src="/kas-logo.png" alt="KAS Logistics Services"/></a><nav className={menu?'nav open':'nav'}>{['Services','Industries','Global Network','Digital Solutions','About KAS','Contact'].map(x=><a key={x} href={'#'+x.toLowerCase().replaceAll(' ','-')} onClick={()=>setMenu(false)}>{x}</a>)}</nav><div className="headRight"><span className="lang">EN⌄</span><a className="quote" href="#contact">Get a Quote ↗</a><button className="hamb" onClick={()=>setMenu(!menu)}>{menu?'×':'☰'}</button></div></header>
-<section id="top" className="hero"><div className="heroArt"><div className="orb"/><div className="ship">▰▰▰</div><div className="route r1"/><div className="route r2"/><div className="route r3"/></div><div className="heroOverlay"/><div className="heroContent"><p className="eyebrow">LOGISTICS BEYOND BORDERS</p><h1>WE MOVE WHAT<br/><span>MOVES THE WORLD.</span></h1><p className="lead">End-to-end logistics connecting the Middle East, Africa and the world. Built around visibility, reliability and the way your business moves.</p><div className="actions"><a className="primary" href="#contact">Get a Quote →</a><a className="outline" href="#tracking">Track Shipment ↗</a></div></div><div className="stats"><div><b>2023</b><small>Founded in Riyadh</small></div><div><b>7+</b><small>Network Markets</small></div><div><b>MEA</b><small>Core Region</small></div><div><b>24/7</b><small>Operational Mindset</small></div></div></section>
-<div className="ticker"><span>GLOBAL LOGISTICS</span><span>LOCAL EXPERTISE</span><span>RIYADH · GCC · MIDDLE EAST · AFRICA</span><span>ONE PARTNER. EVERY MOVE.</span></div>
-<section id="services" className="section"><div className="intro"><div><p className="eyebrow dark">WHAT WE MOVE</p><h2>One supply chain.<br/><em>Every mode.</em></h2></div><p>From a single shipment to complex project cargo, KAS connects the right mode, route and operational expertise around your business.</p></div><div className="cards">{services.map(s=><article className="card" key={s[0]}><div className="cardTop"><span>{s[0]}</span><b>KAS</b></div><i>{s[3]}</i><h3>{s[1]}</h3><p>{s[2]}</p><a href="#contact">Explore service →</a></article>)}</div></section>
-<section id="tracking" className="track"><div className="trackVisual"><div className="mapGrid"/><div className="live">KAS CONTROL TOWER <b>● LIVE</b></div><div className="dots"><i/><i/><i/><i/></div><div className="path pA"/><div className="path pB"/><div className="path pC"/><div className="routeLabels"><b>GLOBAL ORIGIN</b><strong>→</strong><b>MENA / AFRICA DESTINATION</b></div></div><div className="trackPanel"><p className="eyebrow dark">TRACK YOUR SHIPMENT</p><h2>Know where it is.<br/><em>Know what happens next.</em></h2><p>Enter your shipment reference to access the latest available movement status.</p><form onSubmit={e=>{e.preventDefault();if(track.trim())setSent(true)}}><input value={track} onChange={e=>setTrack(e.target.value)} placeholder="Enter tracking number"/><button>Track →</button></form>{sent&&<div className="result"><b>REFERENCE RECEIVED</b><span>{track}</span><small>Live status will appear here when connected to the KAS tracking system.</small></div>}<div className="timeline"><span>● Picked Up</span><span>○ In Transit</span><span>○ Customs</span><span>○ Delivered</span></div></div></section>
-<section id="digital-solutions" className="dark"><div className="intro digitalIntro"><div><p className="eyebrow">KAS DIGITAL LOGISTICS ECOSYSTEM</p><h2>THE <em>CONTROL TOWER.</em><br/>FOR EVERY MOVE.</h2></div><p>Digital tools designed to turn logistics data into operational visibility and better decisions.</p></div><div className="dashboard"><div className="dashHead"><span>KAS CONTROL TOWER</span><b>● SYSTEM OPERATIONAL</b></div><div className="metrics">{[['SHIPMENT VISIBILITY','24 / 7','Real-time operational view'],['DIGITAL QUOTES','FAST','Rate requests in one workflow'],['OPERATIONS','ONE VIEW','CRM and shipment coordination'],['INVOICING','AUTO','Less friction, more control']].map(x=><div key={x[0]}><small>{x[0]}</small><strong>{x[1]}</strong><span>{x[2]}</span></div>)}</div><div className="dashRoute">RIYADH <b>────────●────────●────────●────────</b> AFRICA</div></div></section>
-<section id="industries" className="section"><div className="intro"><div><p className="eyebrow dark">BUILT AROUND YOUR BUSINESS</p><h2>Logistics for<br/><em>what moves you.</em></h2></div><p>Industry knowledge matters when cargo, timing, compliance and cost all have to work together.</p></div><div className="industryGrid">{industries.map((x,i)=><a href="#contact" key={x}><small>{String(i+1).padStart(2,'0')}</small><b>{x}</b><span>↗</span></a>)}</div></section>
-<section id="global-network" className="network"><div className="networkCopy"><p className="eyebrow">GLOBAL REACH · LOCAL EXPERTISE</p><h2>FROM RIYADH<br/><em>TO THE WORLD.</em></h2><p>Strategically positioned in Riyadh with a growing network across the Middle East and Africa, KAS brings regional knowledge to global movement.</p><a className="primary" href="#contact">Our Global Network →</a></div><div className="networkMap"><div className="globe"/><div className="riyadh">● RIYADH</div>{network.map((x,i)=><span className={'node n'+i} key={x}>● {x}</span>)}</div></section>
-<section id="about-kas" className="about"><div className="year">2023</div><div><p className="eyebrow dark">KAS FOR LOGISTICS SERVICES</p><h2>Built in Riyadh.<br/><em>Designed for the world.</em></h2><p className="aboutText">KAS is a logistics partner focused on global transportation, GCC e-commerce distribution and industrial solutions across the Middle East and Africa.</p><div className="pillars"><span>01 / Reliability</span><span>02 / Visibility</span><span>03 / Regional Expertise</span><span>04 / Digital Operations</span></div></div></section>
-<section id="contact" className="contact"><div><p className="eyebrow">READY TO MOVE?</p><h2>WE MOVE WHAT<br/><span>MOVES THE WORLD.</span></h2></div><div><a className="darkBtn" href="mailto:sales@kaslogistic.com">Start a Conversation →</a><a className="email" href="mailto:sales@kaslogistic.com">sales@kaslogistic.com ↗</a></div></section>
-<footer><div className="footTop"><div><img src="/kas-logo.png" alt="KAS"/><p>Global logistics. Regional intelligence.<br/>One partner for every move.</p></div><div className="footCols"><div><b>EXPLORE</b><a href="#services">Services</a><a href="#industries">Industries</a><a href="#global-network">Global Network</a></div><div><b>CONNECT</b><a href="mailto:info@kaslogistic.com">info@kaslogistic.com</a><a href="mailto:sales@kaslogistic.com">sales@kaslogistic.com</a><span>Riyadh, Saudi Arabia</span></div><div><b>FOLLOW</b><span>@KASMena</span><span>KASMena</span></div></div></div><div className="footBottom"><span>© 2026 KAS For Logistics Services</span><span>WE MOVE WHAT MOVES THE WORLD.</span></div></footer>
-</main>}
+
+import { useState } from "react";
+
+const services = [
+  ["01", "Air Freight", "Fast, reliable air cargo solutions for time-sensitive shipments."],
+  ["02", "Sea Freight", "FCL, LCL, reefer, project and specialized ocean cargo."],
+  ["03", "Land Freight", "FTL, LTL, oversized, DG and temperature-controlled transport."],
+  ["04", "Warehousing", "Storage, labeling, packaging, inventory and distribution."],
+  ["05", "Project Logistics", "Multimodal, chartering, break bulk, RO-RO and project cargo."],
+  ["06", "Digital Logistics", "Tracking, digital quotations, CRM and connected operations."],
+];
+
+const industries = [
+  ["E-Commerce", "Fulfillment, distribution and customer visibility."],
+  ["Healthcare & Pharma", "Controlled, time-sensitive and specialized cargo."],
+  ["Industrial", "Heavy, oversized and project supply chains."],
+  ["Automotive", "Parts, vehicles and time-critical movements."],
+  ["Energy", "Complex logistics for demanding operational environments."],
+  ["Retail", "Reliable inbound, storage and distribution flows."],
+];
+
+export default function Home() {
+  const [menu, setMenu] = useState(false);
+  const [lang, setLang] = useState("EN");
+  const [tracking, setTracking] = useState("");
+  const [trackResult, setTrackResult] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
+
+  const ar = lang === "AR";
+
+  function submitTrack(e) {
+    e.preventDefault();
+    setTrackResult(Boolean(tracking.trim()));
+  }
+
+  return (
+    <main className={ar ? "site rtl" : "site"}>
+      <header className="header">
+        <div className="container nav">
+          <a href="#top" className="logoWrap" aria-label="KAS Logistics">
+            <img src="/kas-logo.png" className="logo" alt="KAS Logistics Services" />
+          </a>
+
+          <nav className={menu ? "navLinks open" : "navLinks"}>
+            <a href="#services" onClick={() => setMenu(false)}>{ar ? "الخدمات" : "Services"}</a>
+            <a href="#industries" onClick={() => setMenu(false)}>{ar ? "القطاعات" : "Industries"}</a>
+            <a href="#network" onClick={() => setMenu(false)}>{ar ? "الشبكة" : "Global Network"}</a>
+            <a href="#digital" onClick={() => setMenu(false)}>{ar ? "الحلول الرقمية" : "Digital Solutions"}</a>
+            <a href="#about" onClick={() => setMenu(false)}>{ar ? "عن KAS" : "About KAS"}</a>
+            <a href="#contact" onClick={() => setMenu(false)}>{ar ? "تواصل" : "Contact"}</a>
+          </nav>
+
+          <div className="navActions">
+            <button className="langBtn" onClick={() => setLang(ar ? "EN" : "AR")}>{ar ? "EN" : "AR"} ↗</button>
+            <button className="quoteBtn" onClick={() => setQuoteOpen(true)}>{ar ? "اطلب عرض سعر" : "Get a Quote"} →</button>
+            <button className="menuBtn" onClick={() => setMenu(!menu)} aria-label="Menu">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section id="top" className="hero">
+        <div className="heroImage" aria-hidden="true"></div>
+        <div className="heroShade"></div>
+        <div className="container heroGrid">
+          <div className="heroCopy">
+            <div className="eyebrow"><i></i>{ar ? "خدمات لوجستية تتجاوز الحدود" : "LOGISTICS BEYOND BORDERS"}</div>
+            <h1>
+              {ar ? <>نحرّك ما<br /><span>يحرّك العالم.</span></> : <>WE MOVE WHAT<br /><span>MOVES THE WORLD.</span></>}
+            </h1>
+            <p className="heroLead">
+              {ar
+                ? "حلول لوجستية متكاملة تربط الشرق الأوسط وأفريقيا بالعالم، مبنية على الرؤية والموثوقية وطريقة تحرك أعمالك."
+                : "End-to-end logistics connecting the Middle East, Africa and the world. Built around visibility, reliability and the way your business moves."}
+            </p>
+            <div className="heroButtons">
+              <button className="primaryBtn" onClick={() => setQuoteOpen(true)}>{ar ? "اطلب عرض سعر" : "Get a Quote"} →</button>
+              <a className="ghostBtn" href="#tracking">{ar ? "تتبع شحنتك" : "Track Shipment"} ↗</a>
+            </div>
+            <div className="heroMeta">
+              <div><strong>2023</strong><span>{ar ? "تأسست في الرياض" : "Founded in Riyadh"}</span></div>
+              <div><strong>7+</strong><span>{ar ? "أسواق ضمن الشبكة" : "Network markets"}</span></div>
+              <div><strong>MENA</strong><span>{ar ? "الشرق الأوسط وأفريقيا" : "Core region"}</span></div>
+            </div>
+          </div>
+
+          <div className="heroPanel">
+            <div className="panelTop"><span>KAS CONTROL TOWER</span><b><i></i> LIVE</b></div>
+            <div className="routeLine">
+              <div><small>ORIGIN</small><strong>GLOBAL</strong></div>
+              <div className="routeDots"><i></i><span></span><i></i><span></span><i></i></div>
+              <div><small>DESTINATION</small><strong>MENA / AFRICA</strong></div>
+            </div>
+            <form className="trackForm" onSubmit={submitTrack}>
+              <input value={tracking} onChange={(e) => setTracking(e.target.value)} placeholder="Enter tracking number" />
+              <button>TRACK →</button>
+            </form>
+            {trackResult && (
+              <div className="trackResult">
+                <b>{tracking.toUpperCase()}</b>
+                <span>● Tracking reference received</span>
+                <small>Connect this form to the production tracking API when credentials are available.</small>
+              </div>
+            )}
+            <div className="panelStats">
+              <div><strong>Air</strong><span>Fast lanes</span></div>
+              <div><strong>Sea</strong><span>Global gateways</span></div>
+              <div><strong>Land</strong><span>Regional reach</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="trustStrip">
+        <div className="container trustGrid">
+          <div><span>01</span><b>One connected flow</b><small>From origin to final delivery</small></div>
+          <div><span>02</span><b>Regional expertise</b><small>Middle East & Africa focus</small></div>
+          <div><span>03</span><b>Digital visibility</b><small>Operations built around data</small></div>
+          <div><span>04</span><b>Project capability</b><small>Complex cargo, simplified</small></div>
+        </div>
+      </section>
+
+      <section id="services" className="section servicesSection">
+        <div className="container">
+          <div className="sectionHead">
+            <div><div className="kicker">OUR SERVICES</div><h2>{ar ? "حلول لوجستية من البداية إلى النهاية" : "End-to-End Logistics Solutions"}</h2></div>
+            <p>{ar ? "شبكة متكاملة من الشحن والتخزين والمشاريع والحلول الرقمية تحت مظلة واحدة." : "A connected portfolio of freight, warehousing, project logistics and digital solutions under one roof."}</p>
+          </div>
+          <div className="serviceGrid">
+            {services.map(([n, title, text]) => (
+              <article className="serviceCard" key={n}>
+                <span className="serviceNo">{n}</span>
+                <div className="serviceIcon">{n}</div>
+                <h3>{ar ? title : title}</h3>
+                <p>{text}</p>
+                <a href="#contact">Explore →</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="industries" className="section darkSection">
+        <div className="container">
+          <div className="sectionHead">
+            <div><div className="kicker">INDUSTRIES WE SERVE</div><h2>Built around the way industries move.</h2></div>
+            <p>Purposeful logistics for demanding supply chains, from fast commerce to complex industrial cargo.</p>
+          </div>
+          <div className="industryGrid">
+            {industries.map(([title, text], i) => (
+              <article className="industryCard" key={title}>
+                <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><a href="#contact">View capability →</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="network" className="section networkSection">
+        <div className="container networkWrap">
+          <div className="networkCopy">
+            <div className="kicker">GLOBAL REACH. LOCAL EXPERTISE.</div>
+            <h2>Connecting markets across continents.</h2>
+            <p>KAS is headquartered in Riyadh with a network across Saudi Arabia, the UAE and key African markets including Kenya, South Africa, Namibia, Sudan and Rwanda.</p>
+            <div className="networkBullets">
+              <span>Saudi Arabia</span><span>UAE</span><span>Kenya</span><span>South Africa</span><span>Namibia</span><span>Sudan</span><span>Rwanda</span>
+            </div>
+            <a className="primaryBtn inlineBtn" href="#contact">Explore Our Network →</a>
+          </div>
+          <div className="networkMap">
+            <div className="mapGrid"></div>
+            <div className="mapWorld">WORLD</div>
+            <div className="mapNode n1">RIYADH</div>
+            <div className="mapNode n2">UAE</div>
+            <div className="mapNode n3">KENYA</div>
+            <div className="mapNode n4">S. AFRICA</div>
+            <div className="mapNode n5">RWANDA</div>
+            <svg viewBox="0 0 600 360" preserveAspectRatio="none">
+              <path d="M355 112 C300 105 260 145 235 178 S180 235 130 252" />
+              <path d="M355 112 C390 140 405 175 395 225 S390 275 355 300" />
+              <path d="M355 112 C410 105 470 130 525 160" />
+              <path d="M355 112 C315 160 300 190 300 225" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section id="digital" className="section digitalSection">
+        <div className="container digitalGrid">
+          <div>
+            <div className="kicker">DIGITAL LOGISTICS</div>
+            <h2>Smarter logistics through technology.</h2>
+            <p>Give your team one operational view across shipments, quotations, documents, customer visibility and workflow.</p>
+            <div className="digitalList">
+              <div><b>Live Tracking</b><span>Shipment milestones and visibility</span></div>
+              <div><b>Digital Quote</b><span>Structured rate requests and workflows</span></div>
+              <div><b>CRM & Operations</b><span>Connected customer and operational data</span></div>
+              <div><b>Automated Invoicing</b><span>Reduce manual administration</span></div>
+            </div>
+          </div>
+          <div className="dashboard">
+            <div className="dashTop"><b>KAS CONTROL TOWER</b><span>● SYSTEM ONLINE</span></div>
+            <div className="dashCards"><div><small>ACTIVE</small><strong>LIVE</strong></div><div><small>ROUTES</small><strong>07</strong></div><div><small>STATUS</small><strong>98%</strong></div></div>
+            <div className="dashChart"><div className="chartLine"></div><div className="chartLine second"></div><span>VISIBILITY / TIME</span></div>
+            <div className="dashRows"><div><span>Origin gateway</span><b>Confirmed</b></div><div><span>In transit</span><b>Live</b></div><div><span>Destination</span><b>Scheduled</b></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="section aboutSection">
+        <div className="container aboutGrid">
+          <div><div className="kicker">KAS LOGISTICS SERVICES</div><h2>Your cargo. Our commitment.</h2></div>
+          <div><p>Founded in 2023 and headquartered in Riyadh, KAS is built to connect global supply chains with the Middle East and Africa through reliable, efficient and increasingly digital logistics solutions.</p><a className="ghostBtn darkText" href="#contact">About KAS →</a></div>
+        </div>
+      </section>
+
+      <section id="contact" className="section ctaSection">
+        <div className="container cta">
+          <div><div className="kicker light">YOUR CARGO. OUR COMMITMENT.</div><h2>Ready to move what moves your business?</h2></div>
+          <div><p>Tell KAS where your cargo starts, where it needs to go and what matters most.</p><button className="whiteBtn" onClick={() => setQuoteOpen(true)}>Get a Quote →</button></div>
+        </div>
+      </section>
+
+      <footer className="footer">
+        <div className="container footerGrid">
+          <div><img src="/kas-logo.png" alt="KAS Logistics Services" /><p>Connected logistics across the Middle East, Africa and global supply chains.</p><p>info@kaslogistic.com<br/>sales@kaslogistic.com</p></div>
+          <div><b>SOLUTIONS</b><a href="#services">Air Freight</a><a href="#services">Sea Freight</a><a href="#services">Land Freight</a><a href="#services">Warehousing</a></div>
+          <div><b>DIGITAL</b><a href="#digital">Control Tower</a><a href="#tracking">Tracking</a><a href="#digital">Digital Quote</a><a href="#digital">Operations</a></div>
+          <div><b>COMPANY</b><a href="#about">About KAS</a><a href="#network">Network</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div>
+        </div>
+        <div className="container footerBottom"><span>© KAS Logistics Services</span><span>Riyadh, Saudi Arabia</span></div>
+      </footer>
+
+      {quoteOpen && (
+        <div className="modalBackdrop" onClick={() => setQuoteOpen(false)}>
+          <div className="quoteModal" onClick={(e) => e.stopPropagation()}>
+            <button className="closeModal" onClick={() => setQuoteOpen(false)}>×</button>
+            <div className="kicker">KAS QUOTE</div>
+            <h2>Tell us what needs to move.</h2>
+            <div className="formGrid">
+              <label>Origin<input placeholder="Riyadh / Dubai / Shanghai..." /></label>
+              <label>Destination<input placeholder="Jeddah / Nairobi / Johannesburg..." /></label>
+              <label>Service<select><option>Air Freight</option><option>Sea Freight</option><option>Land Freight</option><option>Warehousing</option><option>Project Logistics</option></select></label>
+              <label>Cargo type<select><option>General Cargo</option><option>Pharma</option><option>Perishables</option><option>Dangerous Goods</option><option>Valuables</option></select></label>
+            </div>
+            <button className="primaryBtn full" onClick={() => setQuoteOpen(false)}>Continue →</button>
+            <small>Production pricing and transit times should be connected to KAS rating and operations systems.</small>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+}
