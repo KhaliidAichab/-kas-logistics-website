@@ -1,0 +1,1 @@
+import "./globals.css"; export const metadata={title:"KAS Logistics | Move What Matters",description:"KAS Logistics — global transportation, warehousing and project logistics."}; export default function RootLayout({children}){return <html lang="en"><body>{children}</body></html>}
