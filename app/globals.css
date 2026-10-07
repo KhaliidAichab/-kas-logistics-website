@@ -25,28 +25,6 @@
   h1{font-size:53px}.heroLead{font-size:15px}.heroButtons{display:grid}.heroButtons>*{width:100%;justify-content:center}.serviceGrid{grid-template-columns:1fr}.trustGrid{grid-template-columns:1fr}.heroMeta{display:grid;grid-template-columns:1fr 1fr}.heroMeta div{min-width:0}.heroPanel{padding:15px}.routeLine{grid-template-columns:1fr;gap:10px;margin:28px 0}.routeLine>div:last-child{text-align:left}.routeDots{display:none}.trackForm{display:grid}.trackForm button{padding:12px}.footerGrid{grid-template-columns:1fr}.footerGrid>div:first-child{grid-column:auto}
 }
 /* KAS — Mobile Final Polish */
-@media (max-width: 760px) {
-  .header {
-    height: 72px;
-  }
-
-  .header .container {
-    min-height: 72px;
-  }
-
-  .logo img {
-    max-width: 190px;
-    height: auto;
-  }
-
-  .navActions {
-    gap: 8px;
-  }
-
-  .menuBtn {
-    width: 58px;
-    height: 58px;
-  }
 
   .section {
     padding: 76px 0;
