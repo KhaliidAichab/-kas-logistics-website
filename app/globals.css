@@ -24,3 +24,96 @@
 @media(max-width:480px){
   h1{font-size:53px}.heroLead{font-size:15px}.heroButtons{display:grid}.heroButtons>*{width:100%;justify-content:center}.serviceGrid{grid-template-columns:1fr}.trustGrid{grid-template-columns:1fr}.heroMeta{display:grid;grid-template-columns:1fr 1fr}.heroMeta div{min-width:0}.heroPanel{padding:15px}.routeLine{grid-template-columns:1fr;gap:10px;margin:28px 0}.routeLine>div:last-child{text-align:left}.routeDots{display:none}.trackForm{display:grid}.trackForm button{padding:12px}.footerGrid{grid-template-columns:1fr}.footerGrid>div:first-child{grid-column:auto}
 }
+/* KAS — Mobile Final Polish */
+@media (max-width: 760px) {
+  .header {
+    height: 72px;
+  }
+
+  .header .container {
+    min-height: 72px;
+  }
+
+  .logo img {
+    max-width: 190px;
+    height: auto;
+  }
+
+  .navActions {
+    gap: 8px;
+  }
+
+  .menuBtn {
+    width: 58px;
+    height: 58px;
+  }
+
+  .section {
+    padding: 76px 0;
+  }
+
+  .servicesSection {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .serviceGrid {
+    gap: 18px;
+  }
+
+  .serviceCard {
+    min-height: 390px;
+    padding: 34px;
+  }
+
+  .darkSection {
+    padding-top: 76px;
+    padding-bottom: 76px;
+  }
+
+  .industryGrid {
+    gap: 18px;
+  }
+
+  .industryCard {
+    min-height: 360px;
+    padding: 34px;
+  }
+
+  .networkSection,
+  .digitalSection,
+  .aboutSection {
+    padding-top: 78px;
+    padding-bottom: 78px;
+  }
+
+  .footer {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    max-width: 175px;
+  }
+
+  .menuBtn {
+    width: 54px;
+    height: 54px;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .serviceCard {
+    min-height: 340px;
+    padding: 28px;
+  }
+
+  .industryCard {
+    min-height: 320px;
+    padding: 28px;
+  }
+}
