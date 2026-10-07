@@ -248,6 +248,8 @@ export default function Home() {
             <button className="primaryBtn full" onClick={() => setQuoteOpen(false)}>Continue →</button>
             <small>Production pricing and transit times should be connected to KAS rating and operations systems.</small>
           </div>
-        </div>
-  );
+</div>
+)}
+</main>
+);
 }
