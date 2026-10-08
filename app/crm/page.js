@@ -658,12 +658,22 @@ z-index: 100;
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search shipment, customer..."
               />
-              <button className="actionBtn secondary">
-                + New Shipment
-              </button>
-              <button className="actionBtn">
-                + New Quote
-              </button>
+              <button
+  className="actionBtn"
+  onClick={() => setActive("Shipments")}
+>
+  + New Shipment
+</button>
+                
+    
+              <button
+  className="actionBtn"
+  onClick={() => setActive("Quotes")}
+>
+  + New Quote
+</button>
+            
+              
             </div>
           </header>
 
