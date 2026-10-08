@@ -922,6 +922,7 @@ z-index: 100;
               </div>
             </div>
           </section>
+)}
 {active === "Shipments" && showShipmentForm && (
   <section className="card" style={{ marginBottom: "18px" }}>
     <div className="cardHeader">
@@ -1026,7 +1027,8 @@ z-index: 100;
     </form>
   </section>
 )}
-          <section className="card tableCard">
+     {active === "Shipments" && (    
+  <section className="card tableCard">
             <div className="tableHeader">
               <div>
                 <div className="cardTitle">Live Operations</div>
