@@ -66,24 +66,24 @@ export async function POST(request) {
 
     const data = await response.json();
 
-  if (!response.ok) {
-  if (data?.code === "23505") {
-    return NextResponse.json(
-      {
-        error: {
-          code: "DUPLICATE_SHIPMENT_ID",
-          message: "Shipment ID already exists. Please use a unique Shipment ID.",
-        },
-      },
-      { status: 409 }
-    );
-  }
+    if (!response.ok) {
+      if (data?.code === "23505") {
+        return NextResponse.json(
+          {
+            error: {
+              code: "DUPLICATE_SHIPMENT_ID",
+              message:
+                "Shipment ID already exists. Please use a unique Shipment ID.",
+            },
+          },
+          { status: 409 }
+        );
+      }
 
-  return NextResponse.json(
-    { error: data },
-    { status: response.status }
-  );
-}
+      return NextResponse.json(
+        { error: data },
+        { status: response.status }
+      );
     }
 
     return NextResponse.json(
