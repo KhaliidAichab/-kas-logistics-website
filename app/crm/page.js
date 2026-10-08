@@ -676,7 +676,8 @@ z-index: 100;
               
             </div>
           </header>
-
+{active === "Dashboard" && (
+  <>
           <section className="kpis">
             <div className="kpi">
               <div className="kpiTop">
@@ -838,7 +839,8 @@ z-index: 100;
               </table>
             </div>
           </section>
-
+  </>
+)}
           <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
