@@ -619,7 +619,13 @@ z-index: 100;
             </div>
           </div>
         </aside>
-
+{mobileMenuOpen && (
+  <button
+    className="menuOverlay"
+    aria-label="Close menu"
+    onClick={() => setMobileMenuOpen(false)}
+  />
+)}
         <section className="content">
           <button
   className="mobileMenuBtn"
