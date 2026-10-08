@@ -54,6 +54,7 @@ export default function CRM() {
   const [active, setActive] = useState("Dashboard");
   const [search, setSearch] = useState("");
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showShipmentForm, setShowShipmentForm] = useState(false);
   const filteredShipments = shipments.filter((item) =>
     `${item.id} ${item.customer} ${item.route}`
       .toLowerCase()
