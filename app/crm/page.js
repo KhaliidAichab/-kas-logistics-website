@@ -552,6 +552,7 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
           .topActions {
             margin-top: 18px;
             flex-wrap: wrap;
+            gap: 10px;
           }
 
           .search {
