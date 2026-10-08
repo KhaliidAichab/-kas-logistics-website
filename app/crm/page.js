@@ -540,8 +540,8 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
           }
 
           .content {
-            margin-left: 70px;
-            width: calc(100% - 70px);
+            margin-left: 0;
+            width: 100%;
             padding: 20px 14px 35px;
           }
 
