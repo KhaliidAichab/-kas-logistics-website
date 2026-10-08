@@ -577,7 +577,7 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
       `}</style>
 
       <div className="crmShell">
-        580  <aside className={`sidebar ${mobileMenuOpen ? "open" : ""}`}>
+         <aside className={`sidebar ${mobileMenuOpen ? "open" : ""}`}>
           <div className="brand">
             <div className="brandTitle">KAS</div>
             <div className="brandSub">LOGISTICS CONTROL CENTER</div>
