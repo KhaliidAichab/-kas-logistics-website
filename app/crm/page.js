@@ -676,6 +676,138 @@ z-index: 100;
               
             </div>
           </header>
+{active === "Customers" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">TOTAL CUSTOMERS</span>
+          <span className="kpiIcon">C</span>
+        </div>
+        <div className="kpiValue">48</div>
+        <div className="kpiChange">+6 this month</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">ACTIVE CUSTOMERS</span>
+          <span className="kpiIcon">A</span>
+        </div>
+        <div className="kpiValue">42</div>
+        <div className="kpiChange">87.5% of total</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">ACTIVE SHIPMENTS</span>
+          <span className="kpiIcon">S</span>
+        </div>
+        <div className="kpiValue">128</div>
+        <div className="kpiChange">Across all customers</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">CUSTOMER REVENUE</span>
+          <span className="kpiIcon">R</span>
+        </div>
+        <div className="kpiValue">SAR 2.4M</div>
+        <div className="kpiChange">+14.8% this year</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Customer Directory</div>
+          <div className="cardMeta">
+            Customers and active logistics activity
+          </div>
+        </div>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Contact</th>
+              <th>Active Shipments</th>
+              <th>Revenue</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {[
+              {
+                company: "ABC Trading",
+                contact: "Ahmed Alharbi",
+                shipments: 18,
+                revenue: "SAR 420K",
+                status: "Active",
+              },
+              {
+                company: "Gulf Industries",
+                contact: "Mohammed Alotaibi",
+                shipments: 24,
+                revenue: "SAR 680K",
+                status: "Active",
+              },
+              {
+                company: "Nile Retail",
+                contact: "Omar Hassan",
+                shipments: 12,
+                revenue: "SAR 295K",
+                status: "Active",
+              },
+              {
+                company: "MedCare Pharma",
+                contact: "Sara Khalid",
+                shipments: 16,
+                revenue: "SAR 510K",
+                status: "Active",
+              },
+              {
+                company: "Riyadh Manufacturing",
+                contact: "Faisal Ahmed",
+                shipments: 9,
+                revenue: "SAR 185K",
+                status: "Review",
+              },
+            ]
+              .filter((customer) =>
+                `${customer.company} ${customer.contact}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((customer) => (
+                <tr key={customer.company}>
+                  <td>{customer.company}</td>
+                  <td className="muted">{customer.contact}</td>
+                  <td>{customer.shipments}</td>
+                  <td>{customer.revenue}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        customer.status === "Active"
+                          ? "onTime"
+                          : "delayed"
+                      }`}
+                    >
+                      {customer.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </>
+)}
+
+{active === "Dashboard" && (
 {active === "Dashboard" && (
   <>
           <section className="kpis">
