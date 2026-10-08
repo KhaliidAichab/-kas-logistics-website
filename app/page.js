@@ -505,6 +505,7 @@ function previousQuoteStep() {
             </button>
 
             <button
+type="button"
               className="primaryBtn"
               onClick={nextQuoteStep}
             >
