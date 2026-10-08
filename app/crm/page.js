@@ -936,7 +936,47 @@ z-index: 100;
     </div>
 
     <form
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={async (e) => {
+  e.preventDefault();
+
+  const form = e.currentTarget;
+
+  const shipment = {
+    shipment_id: form.querySelector('input[placeholder="Shipment ID"]')?.value || "",
+    customer: form.querySelector('input[placeholder="Customer"]')?.value || "",
+    origin: form.querySelector('input[placeholder="Origin"]')?.value || "",
+    destination: form.querySelector('input[placeholder="Destination"]')?.value || "",
+    mode: form.querySelector("select")?.value || "Air",
+    cargo_type: form.querySelector('input[placeholder="Cargo Type"]')?.value || "",
+    weight: form.querySelector('input[placeholder="Weight"]')?.value || "",
+    quantity: form.querySelector('input[placeholder="Quantity"]')?.value || "",
+    pickup_date: form.querySelector('input[type="date"]')?.value || null,
+    eta: form.querySelector('input[placeholder="ETA"]')?.value || "",
+    special_requirements:
+      form.querySelector('input[placeholder="Special Requirements"]')?.value || "",
+  };
+
+  try {
+    const response = await fetch("/api/shipments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(shipment),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error?.message || "Failed to create shipment");
+    }
+
+    alert("Shipment created successfully");
+    setShowShipmentForm(false);
+  } catch (error) {
+    alert(`Failed to create shipment: ${error.message}`);
+  }
+}}
       style={{
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
