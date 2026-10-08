@@ -26,14 +26,44 @@ export default function Home() {
   const [tracking, setTracking] = useState("");
   const [trackResult, setTrackResult] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+const [quoteStep, setQuoteStep] = useState(1);
 
+const [quoteData, setQuoteData] = useState({
+  origin: "",
+  destination: "",
+  service: "Air Freight",
+  cargoType: "General Cargo",
+  weight: "",
+  quantity: "",
+  dimensions: "",
+  pickupDate: "",
+  requirements: "",
+  company: "",
+  name: "",
+  email: "",
+  phone: "",
+  notes: "",
+});
   const ar = lang === "AR";
 
   function submitTrack(e) {
     e.preventDefault();
     setTrackResult(Boolean(tracking.trim()));
   }
+function updateQuote(field, value) {
+  setQuoteData((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+}
 
+function nextQuoteStep() {
+  setQuoteStep((prev) => Math.min(prev + 1, 4));
+}
+
+function previousQuoteStep() {
+  setQuoteStep((prev) => Math.max(prev - 1, 1));
+}
   return (
     <main className={ar ? "site rtl" : "site"}>
       <header className="header">
@@ -234,22 +264,301 @@ export default function Home() {
       </footer>
 
       {quoteOpen && (
-        <div className="modalBackdrop" onClick={() => setQuoteOpen(false)}>
-          <div className="quoteModal" onClick={(e) => e.stopPropagation()}>
-            <button className="closeModal" onClick={() => setQuoteOpen(false)}>×</button>
-            <div className="kicker">KAS QUOTE</div>
-            <h2>Tell us what needs to move.</h2>
-            <div className="formGrid">
-              <label>Origin<input placeholder="Riyadh / Dubai / Shanghai..." /></label>
-              <label>Destination<input placeholder="Jeddah / Nairobi / Johannesburg..." /></label>
-              <label>Service<select><option>Air Freight</option><option>Sea Freight</option><option>Land Freight</option><option>Warehousing</option><option>Project Logistics</option></select></label>
-              <label>Cargo type<select><option>General Cargo</option><option>Pharma</option><option>Perishables</option><option>Dangerous Goods</option><option>Valuables</option></select></label>
-            </div>
-            <button className="primaryBtn full" onClick={() => setQuoteOpen(false)}>Continue →</button>
-            <small>Production pricing and transit times should be connected to KAS rating and operations systems.</small>
+  <div
+    className="modalBackdrop"
+    onClick={() => setQuoteOpen(false)}
+  >
+    <div
+      className="quoteModal"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button
+        className="closeModal"
+        onClick={() => {
+          setQuoteOpen(false);
+          setQuoteStep(1);
+        }}
+      >
+        ×
+      </button>
+
+      <div className="kicker">KAS QUOTE</div>
+
+      <div className="quoteProgress">
+        <span className={quoteStep >= 1 ? "active" : ""}>01</span>
+        <i />
+        <span className={quoteStep >= 2 ? "active" : ""}>02</span>
+        <i />
+        <span className={quoteStep >= 3 ? "active" : ""}>03</span>
+        <i />
+        <span className={quoteStep >= 4 ? "active" : ""}>04</span>
+      </div>
+
+      {quoteStep === 1 && (
+        <>
+          <h2>Tell us what needs to move.</h2>
+          <p className="quoteIntro">
+            Start with the route and shipment type. We will take it from there.
+          </p>
+
+          <div className="formGrid">
+            <label>
+              Origin
+              <input
+                value={quoteData.origin}
+                onChange={(e) => updateQuote("origin", e.target.value)}
+                placeholder="Riyadh / Dubai / Shanghai..."
+              />
+            </label>
+
+            <label>
+              Destination
+              <input
+                value={quoteData.destination}
+                onChange={(e) =>
+                  updateQuote("destination", e.target.value)
+                }
+                placeholder="Jeddah / Nairobi / Johannesburg..."
+              />
+            </label>
+
+            <label>
+              Service
+              <select
+                value={quoteData.service}
+                onChange={(e) => updateQuote("service", e.target.value)}
+              >
+                <option>Air Freight</option>
+                <option>Sea Freight</option>
+                <option>Land Freight</option>
+                <option>Warehousing</option>
+                <option>Project Logistics</option>
+              </select>
+            </label>
+
+            <label>
+              Cargo type
+              <select
+                value={quoteData.cargoType}
+                onChange={(e) =>
+                  updateQuote("cargoType", e.target.value)
+                }
+              >
+                <option>General Cargo</option>
+                <option>Dangerous Goods</option>
+                <option>Pharmaceuticals</option>
+                <option>Perishables</option>
+                <option>Valuables</option>
+                <option>Oversized / Project Cargo</option>
+              </select>
+            </label>
           </div>
-</div>
+
+          <button
+            className="primaryBtn fullBtn"
+            onClick={nextQuoteStep}
+          >
+            Continue →
+          </button>
+        </>
+      )}
+
+      {quoteStep === 2 && (
+        <>
+          <h2>Cargo details.</h2>
+          <p className="quoteIntro">
+            Give us the key shipment details so our team can assess the move.
+          </p>
+
+          <div className="formGrid">
+            <label>
+              Weight
+              <input
+                value={quoteData.weight}
+                onChange={(e) => updateQuote("weight", e.target.value)}
+                placeholder="e.g. 500 kg"
+              />
+            </label>
+
+            <label>
+              Quantity
+              <input
+                value={quoteData.quantity}
+                onChange={(e) => updateQuote("quantity", e.target.value)}
+                placeholder="e.g. 12 cartons"
+              />
+            </label>
+
+            <label>
+              Dimensions
+              <input
+                value={quoteData.dimensions}
+                onChange={(e) =>
+                  updateQuote("dimensions", e.target.value)
+                }
+                placeholder="L × W × H"
+              />
+            </label>
+
+            <label>
+              Pickup date
+              <input
+                type="date"
+                value={quoteData.pickupDate}
+                onChange={(e) =>
+                  updateQuote("pickupDate", e.target.value)
+                }
+              />
+            </label>
+
+            <label className="fullField">
+              Special requirements
+              <textarea
+                value={quoteData.requirements}
+                onChange={(e) =>
+                  updateQuote("requirements", e.target.value)
+                }
+                placeholder="Temperature control, fragile cargo, DG requirements..."
+              />
+            </label>
+          </div>
+
+          <div className="quoteActions">
+            <button
+              className="ghostBtn"
+              onClick={previousQuoteStep}
+            >
+              ← Back
+            </button>
+
+            <button
+              className="primaryBtn"
+              onClick={nextQuoteStep}
+            >
+              Continue →
+            </button>
+          </div>
+        </>
+      )}
+
+      {quoteStep === 3 && (
+        <>
+          <h2>Your contact details.</h2>
+          <p className="quoteIntro">
+            Tell us who we should contact regarding your shipment.
+          </p>
+
+          <div className="formGrid">
+            <label>
+              Company
+              <input
+                value={quoteData.company}
+                onChange={(e) => updateQuote("company", e.target.value)}
+                placeholder="Company name"
+              />
+            </label>
+
+            <label>
+              Name
+              <input
+                value={quoteData.name}
+                onChange={(e) => updateQuote("name", e.target.value)}
+                placeholder="Full name"
+              />
+            </label>
+
+            <label>
+              Email
+              <input
+                type="email"
+                value={quoteData.email}
+                onChange={(e) => updateQuote("email", e.target.value)}
+                placeholder="name@company.com"
+              />
+            </label>
+
+            <label>
+              Phone / WhatsApp
+              <input
+                value={quoteData.phone}
+                onChange={(e) => updateQuote("phone", e.target.value)}
+                placeholder="+966..."
+              />
+            </label>
+
+            <label className="fullField">
+              Additional notes
+              <textarea
+                value={quoteData.notes}
+                onChange={(e) => updateQuote("notes", e.target.value)}
+                placeholder="Anything else our team should know?"
+              />
+            </label>
+          </div>
+
+          <div className="quoteActions">
+            <button
+              className="ghostBtn"
+              onClick={previousQuoteStep}
+            >
+              ← Back
+            </button>
+
+            <button
+              className="primaryBtn"
+              onClick={nextQuoteStep}
+            >
+              Request a Quote →
+            </button>
+          </div>
+        </>
+      )}
+
+      {quoteStep === 4 && (
+        <div className="quoteSuccess">
+          <div className="successMark">✓</div>
+
+          <h2>Quote request received.</h2>
+
+          <p>
+            Thank you for choosing KAS Logistics. Our team will review
+            your shipment details and contact you shortly.
+          </p>
+
+          <div className="quoteSummary">
+            <div>
+              <span>Route</span>
+              <strong>
+                {quoteData.origin || "—"} → {quoteData.destination || "—"}
+              </strong>
+            </div>
+
+            <div>
+              <span>Service</span>
+              <strong>{quoteData.service}</strong>
+            </div>
+
+            <div>
+              <span>Cargo</span>
+              <strong>{quoteData.cargoType}</strong>
+            </div>
+          </div>
+
+          <button
+            className="primaryBtn fullBtn"
+            onClick={() => {
+              setQuoteOpen(false);
+              setQuoteStep(1);
+            }}
+          >
+            Done
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
 )}
+        
 </main>
 );
 }
