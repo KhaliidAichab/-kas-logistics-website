@@ -1,5 +1,38 @@
 import { NextResponse } from "next/server";
-import { NextResponse } from "next/server";
+export async function GET() {
+  try {
+    const response = await fetch(
+      `${process.env.SUPABASE_URL}/rest/v1/shipments?select=*&order=created_at.desc`,
+      {
+        method: "GET",
+        headers: {
+          apikey: process.env.SUPABASE_SECRET_KEY,
+          Authorization: `Bearer ${process.env.SUPABASE_SECRET_KEY}`,
+        },
+        cache: "no-store",
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return NextResponse.json(
+        { error: data },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, shipments: data },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
+}
 export async function POST(request) {
   try {
     const body = await request.json();
