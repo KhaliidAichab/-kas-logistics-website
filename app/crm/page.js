@@ -93,18 +93,6 @@ useEffect(() => {
 
   return (
     <main className="crm">
-    <div
-  style={{
-    padding: "10px 14px",
-    background: "#fff",
-    color: "#111",
-    fontWeight: "700",
-    margin: "10px",
-    borderRadius: "8px",
-  }}
->
-  Shipments loaded: {filteredShipments.length}
-</div>
       <style>{`
         * {
           box-sizing: border-box;
