@@ -922,7 +922,110 @@ z-index: 100;
               </div>
             </div>
           </section>
+{active === "Shipments" && showShipmentForm && (
+  <section className="card" style={{ marginBottom: "18px" }}>
+    <div className="cardHeader">
+      <div>
+        <div className="cardTitle">Create New Shipment</div>
+        <div className="cardMeta">
+          Enter the shipment details below.
+        </div>
+      </div>
+    </div>
 
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+        gap: "14px",
+        marginTop: "18px",
+      }}
+    >
+      <input
+        className="search"
+        placeholder="Shipment ID"
+      />
+
+      <input
+        className="search"
+        placeholder="Customer"
+      />
+
+      <input
+        className="search"
+        placeholder="Origin"
+      />
+
+      <input
+        className="search"
+        placeholder="Destination"
+      />
+
+      <select className="search" defaultValue="Air">
+        <option value="Air">Air Freight</option>
+        <option value="Sea">Sea Freight</option>
+        <option value="Land">Land Freight</option>
+      </select>
+
+      <input
+        className="search"
+        placeholder="Cargo Type"
+      />
+
+      <input
+        className="search"
+        placeholder="Weight"
+      />
+
+      <input
+        className="search"
+        placeholder="Quantity"
+      />
+
+      <input
+        className="search"
+        type="date"
+      />
+
+      <input
+        className="search"
+        placeholder="ETA"
+      />
+
+      <input
+        className="search"
+        placeholder="Special Requirements"
+        style={{ gridColumn: "1 / -1" }}
+      />
+
+      <div
+        style={{
+          gridColumn: "1 / -1",
+          display: "flex",
+          gap: "10px",
+          justifyContent: "flex-end",
+          marginTop: "4px",
+        }}
+      >
+        <button
+          type="button"
+          className="actionBtn"
+          onClick={() => setShowShipmentForm(false)}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          className="actionBtn"
+        >
+          Create Shipment
+        </button>
+      </div>
+    </form>
+  </section>
+)}
           <section className="card tableCard">
             <div className="tableHeader">
               <div>
