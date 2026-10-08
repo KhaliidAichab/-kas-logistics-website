@@ -922,6 +922,7 @@ z-index: 100;
               </div>
             </div>
           </section>
+</>
 )}
 {active === "Shipments" && showShipmentForm && (
   <section className="card" style={{ marginBottom: "18px" }}>
@@ -1079,7 +1080,7 @@ z-index: 100;
               </table>
             </div>
           </section>
-  </>
+  
           <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
