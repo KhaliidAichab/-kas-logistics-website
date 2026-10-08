@@ -808,7 +808,6 @@ z-index: 100;
 )}
 
 {active === "Dashboard" && (
-{active === "Dashboard" && (
   <>
           <section className="kpis">
             <div className="kpi">
