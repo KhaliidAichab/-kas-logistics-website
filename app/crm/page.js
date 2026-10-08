@@ -524,7 +524,7 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
           .brandSub,
           .navLabel,
-          .navItem span,
+          
           .sidebarBottom {
             display: none;
           }
