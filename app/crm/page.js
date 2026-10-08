@@ -511,6 +511,9 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             
   width: 280px;
             padding: 20px 8px;
+            transform: translateX(-100%);
+transition: transform 0.25s ease;
+z-index: 100;
           }
 
           .brandTitle {
