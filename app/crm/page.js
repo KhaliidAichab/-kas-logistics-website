@@ -1080,7 +1080,7 @@ z-index: 100;
               </table>
             </div>
           </section>
-  
+  )}
           <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
