@@ -515,7 +515,9 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 transition: transform 0.25s ease;
 z-index: 100;
           }
-
+.sidebar.open {
+  transform: translateX(0);
+}
           .brandTitle {
             font-size: 0;
           }
