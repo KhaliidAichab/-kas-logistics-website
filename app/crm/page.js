@@ -532,9 +532,11 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   display: inline;
 }
           .navItem {
-            text-align: center;
-            padding: 13px 4px;
-            font-size: 10px;
+            text-align: left;
+            padding: 13px 14px;
+            font-size: 14px;
+            
+            width: 100%;
           }
 
           .content {
