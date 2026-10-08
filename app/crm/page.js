@@ -518,6 +518,15 @@ z-index: 100;
 .sidebar.open {
   transform: translateX(0);
 }
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 90;
+}
           .brandTitle {
             font-size: 0;
           }
