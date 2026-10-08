@@ -610,7 +610,13 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
         </aside>
 
         <section className="content">
-          <header className="topbar">
+          <button
+  className="mobileMenuBtn"
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+>
+  ☰
+</button>
+    <header className="topbar">
             <div>
               <div className="pageKicker">KAS LOGISTICS / CRM</div>
               <h1 className="pageTitle">{active}</h1>
