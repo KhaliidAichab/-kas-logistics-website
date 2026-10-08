@@ -589,7 +589,10 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             <button
               key={item}
               className={`navItem ${active === item ? "active" : ""}`}
-              onClick={() => setActive(item)}
+              onClick={() => {
+  setActive(item);
+  setMobileMenuOpen(false);
+}}
             >
               <span>{item}</span>
             </button>
