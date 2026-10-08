@@ -508,7 +508,7 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
         @media (max-width: 760px) {
           .sidebar {
-            .sidebar {
+            
   width: 280px;
             padding: 20px 8px;
           }
