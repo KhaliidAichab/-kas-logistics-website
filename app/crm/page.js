@@ -528,7 +528,9 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
           .sidebarBottom {
             display: none;
           }
-
+.navItem span {
+  display: inline;
+}
           .navItem {
             text-align: center;
             padding: 13px 4px;
