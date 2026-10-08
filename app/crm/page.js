@@ -1002,6 +1002,21 @@ z-index: 100;
     }
 
     alert("Shipment created successfully");
+    if (result.shipment) {
+  const item = result.shipment;
+
+  setLiveShipments((prev) => [
+    {
+      id: item.shipment_id || item.id,
+      customer: item.customer || "",
+      route: `${item.origin || ""} → ${item.destination || ""}`,
+      mode: item.service || item.mode || "Air",
+      eta: item.eta || "-",
+      status: item.status || "Created",
+    },
+    ...prev,
+  ]);
+}
     setShowShipmentForm(false);
   } catch (error) {
     alert(`Failed to create shipment: ${error.message}`);
