@@ -661,7 +661,10 @@ z-index: 100;
               />
               <button
   className="actionBtn"
-  onClick={() => setActive("Shipments")}
+  onClick={() => {
+  setActive("Shipments");
+  setShowShipmentForm(true);
+}}
 >
   + New Shipment
 </button>
