@@ -55,7 +55,37 @@ export default function CRM() {
   const [search, setSearch] = useState("");
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShipmentForm, setShowShipmentForm] = useState(false);
-  const filteredShipments = shipments.filter((item) =>
+  const [liveShipments, setLiveShipments] = useState(shipments);
+
+useEffect(() => {
+  async function loadShipments() {
+    try {
+      const response = await fetch("/api/shipments", {
+        cache: "no-store",
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.shipments) {
+        const mappedShipments = result.shipments.map((item) => ({
+          id: item.shipment_id || item.id,
+          customer: item.customer || "",
+          route: `${item.origin || ""} → ${item.destination || ""}`,
+          mode: item.service || item.mode || "Air",
+          eta: item.eta || "-",
+          status: item.status || "Created",
+        }));
+
+        setLiveShipments(mappedShipments);
+      }
+    } catch (error) {
+      console.error("Failed to load shipments:", error);
+    }
+  }
+
+  loadShipments();
+}, []);
+  const filteredShipments = liveShipments.filter((item) =>
     `${item.id} ${item.customer} ${item.route}`
       .toLowerCase()
       .includes(search.toLowerCase())
