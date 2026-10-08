@@ -19,7 +19,7 @@ export async function POST(request) {
           customer: body.customer || "",
           origin: body.origin || "",
           destination: body.destination || "",
-          mode: body.mode || "Air",
+          service: body.mode || "Air",
           cargo_type: body.cargo_type || null,
           weight: body.weight || null,
           quantity: body.quantity || null,
