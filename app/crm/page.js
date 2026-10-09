@@ -1171,7 +1171,7 @@ onClick={() => {
 </button>
             </div>
 
-            <div className="tableWrap">
+            <div className="tableWrap shipmentTableWrap">
               <table>
                 <thead>
                   <tr>
