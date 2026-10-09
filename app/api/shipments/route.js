@@ -14,68 +14,60 @@ export async function GET() {
         cache: "no-store",
       }
     );
-
     const data = await response.json();
-
     if (!response.ok) {
       return NextResponse.json(
         { error: data },
-        { status: response.status }
+        {
+          status: response.status,
+          headers: { "Cache-Control": "no-store" },
+        }
       );
     }
-
     const seenIds = new Set();
-
-const uniqueShipments = Array.isArray(data)
-  ? [...data]
-      .sort(
-        (a, b) =>
-          new Date(a.created_at) - new Date(b.created_at)
-      )
-      .filter((shipment) => {
-        const id = shipment.shipment_id;
-
-        if (!id) return true;
-        if (seenIds.has(id)) return false;
-
-        seenIds.add(id);
-        return true;
-      })
-      .sort(
-        (a, b) =>
-          new Date(b.created_at) - new Date(a.created_at)
-      )
-  : data;
-
-return NextResponse.json(
-  { success: true, shipments: uniqueShipments },
-  {
-    headers: {
-      "Cache-Control":
-        "no-store, no-cache, must-revalidate, proxy-revalidate",
-      Pragma: "no-cache",
-      Expires: "0",
-    },
-  }
-);
-  {
-    status: 200,
-    headers: {
-      "Cache-Control": "no-store, max-age=0",
-    },
-  }
-);
+    const uniqueShipments = Array.isArray(data)
+      ? [...data]
+          .sort(
+            (a, b) =>
+              new Date(a.created_at) - new Date(b.created_at)
+          )
+          .filter((shipment) => {
+            const id = shipment.shipment_id;
+            if (!id) return true;
+            if (seenIds.has(id)) return false;
+            seenIds.add(id);
+            return true;
+          })
+          .sort(
+            (a, b) =>
+              new Date(b.created_at) - new Date(a.created_at)
+          )
+      : data;
+    return NextResponse.json(
+      { success: true, shipments: uniqueShipments },
+      {
+        status: 200,
+        headers: {
+          "Cache-Control":
+            "no-store, no-cache, must-revalidate, proxy-revalidate",
+          Pragma: "no-cache",
+          Expires: "0",
+        },
+      }
+    );
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
-      { status: 500 }
+      {
+        status: 500,
+        headers: { "Cache-Control": "no-store" },
+      }
     );
   }
 }
 export async function POST(request) {
   try {
     const body = await request.json();
-
     const response = await fetch(
       `${process.env.SUPABASE_URL}/rest/v1/shipments`,
       {
@@ -102,9 +94,7 @@ export async function POST(request) {
         }),
       }
     );
-
     const data = await response.json();
-
     if (!response.ok) {
       if (data?.code === "23505") {
         return NextResponse.json(
@@ -118,13 +108,11 @@ export async function POST(request) {
           { status: 409 }
         );
       }
-
       return NextResponse.json(
         { error: data },
         { status: response.status }
       );
     }
-
     return NextResponse.json(
       { success: true, shipment: data[0] },
       { status: 201 }
