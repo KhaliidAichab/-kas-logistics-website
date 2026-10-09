@@ -1113,7 +1113,7 @@ z-index: 100;
     </form>
   </section>
 )}
-     {active === "Shipments" && (    
+      {(active === "Dashboard" || active === "Shipments") && (  
   <section className="card tableCard">
             <div className="tableHeader">
               <div>
