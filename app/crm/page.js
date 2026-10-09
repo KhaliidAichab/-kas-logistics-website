@@ -67,6 +67,21 @@ useEffect(() => {
       const result = await response.json();
 
       if (response.ok && result.shipments) {
+        const seenShipmentIds = new Set();
+
+const deduplicatedShipments = [...result.shipments]
+  .sort((a, b) => Number(a.id) - Number(b.id))
+  .filter((item) => {
+    const key = String(
+      item.shipment_id || item.id || ""
+    ).trim().toUpperCase();
+
+    if (!key) return true;
+    if (seenShipmentIds.has(key)) return false;
+
+    seenShipmentIds.add(key);
+    return true;
+  });
         const mappedShipments = result.shipments.map((item) => ({
           id: item.shipment_id || item.id,
           customer: item.customer || "",
