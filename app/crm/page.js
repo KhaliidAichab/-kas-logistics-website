@@ -56,7 +56,7 @@ export default function CRM() {
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShipmentForm, setShowShipmentForm] = useState(false);
   const [liveShipments, setLiveShipments] = useState([]);
-
+const [showAllShipments, setShowAllShipments] = useState(false);
 useEffect(() => {
   async function loadShipments() {
     try {
