@@ -483,7 +483,7 @@ setLiveShipments(mappedShipments);
         table {
           width: 100%;
           border-collapse: collapse;
-          min-width: 760px;
+          min-width: 0;
         }
 
         th {
