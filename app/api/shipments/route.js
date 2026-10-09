@@ -24,8 +24,40 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json(
-  { success: true, shipments: data },
+    const seenIds = new Set();
+
+const uniqueShipments = Array.isArray(data)
+  ? [...data]
+      .sort(
+        (a, b) =>
+          new Date(a.created_at) - new Date(b.created_at)
+      )
+      .filter((shipment) => {
+        const id = shipment.shipment_id;
+
+        if (!id) return true;
+        if (seenIds.has(id)) return false;
+
+        seenIds.add(id);
+        return true;
+      })
+      .sort(
+        (a, b) =>
+          new Date(b.created_at) - new Date(a.created_at)
+      )
+  : data;
+
+return NextResponse.json(
+  { success: true, shipments: uniqueShipments },
+  {
+    headers: {
+      "Cache-Control":
+        "no-store, no-cache, must-revalidate, proxy-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    },
+  }
+);
   {
     status: 200,
     headers: {
