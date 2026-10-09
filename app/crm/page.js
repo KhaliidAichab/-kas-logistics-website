@@ -1136,7 +1136,9 @@ z-index: 100;
   <section className="card tableCard">
             <div className="tableHeader">
               <div>
-                <div className="cardTitle">Live Operations</div>
+                <div className="cardTitle">
+  {showAllShipments ? "All Shipments" : "Live Operations"}
+</div>
                 <div className="cardMeta">
                   Shipment activity across the KAS network
                 </div>
