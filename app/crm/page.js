@@ -1144,10 +1144,13 @@ z-index: 100;
               <button
   type="button"
   className="viewAll"
-  onClick={() => {
-    setShowShipmentForm(false);
-    setActive("Shipments");
-  }}
+  
+onClick={() => {
+  setShowShipmentForm(false);
+  setShowAllShipments(true);
+  setActive("Shipments");
+}}
+
   style={{
     cursor: "pointer",
     background: "transparent",
