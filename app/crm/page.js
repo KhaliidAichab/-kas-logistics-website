@@ -1122,7 +1122,7 @@ z-index: 100;
                   Shipment activity across the KAS network
                 </div>
               </div>
-              <div className="viewAll">View all →</div>
+              <div className="viewAll" onClick={() => setActive("Shipments")} style={{ cursor: "pointer" }}>View all →</div>
             </div>
 
             <div className="tableWrap">
