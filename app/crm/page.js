@@ -82,7 +82,18 @@ const deduplicatedShipments = [...result.shipments]
     seenShipmentIds.add(key);
     return true;
   });
-        const mappedShipments = result.shipments.map((item) => ({
+        
+const mappedShipments = deduplicatedShipments.map((item) => ({
+  id: String(item.shipment_id || item.id || "").trim(),
+  customer: item.customer || "",
+  route: `${item.origin || ""} → ${item.destination || ""}`,
+  mode: item.service || item.mode || "Air",
+  eta: item.eta || "-",
+  status: item.status || "Created",
+}));
+
+setLiveShipments(mappedShipments);
+
           id: item.shipment_id || item.id,
           customer: item.customer || "",
           route: `${item.origin || ""} → ${item.destination || ""}`,
