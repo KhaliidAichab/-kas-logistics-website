@@ -1182,7 +1182,7 @@ z-index: 100;
 
                 <tbody>
                   {filteredShipments.map((shipment) => (
-                    <tr key={shipment.id}>
+                    <tr key={`${shipment.id}-${shipment.customer}`}>
                       <td className="shipmentId">{shipment.id}</td>
                       <td className="customer">{shipment.customer}</td>
                       <td className="muted">{shipment.route}</td>
