@@ -695,7 +695,13 @@ z-index: 100;
     <header className="topbar">
             <div>
               <div className="pageKicker">KAS LOGISTICS / CRM</div>
-              <h1 className="pageTitle">{active}</h1>
+              <h1 className="pageTitle">
+  {active === "Shipments" && showAllShipments
+    ? "All Shipments"
+    : active === "Shipments"
+    ? "Live Operations"
+    : active}
+</h1>
               <p className="pageDescription">
                 Monitor your logistics operations from one connected workspace.
               </p>
