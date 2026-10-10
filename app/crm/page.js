@@ -2167,6 +2167,281 @@ onClick={() => {
   </>
 )}
 
+{active === "Analytics" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">ON-TIME DELIVERY</span>
+          <span className="kpiIcon">%</span>
+        </div>
+        <div className="kpiValue">94.2%</div>
+        <div className="kpiChange">Sample performance</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">ACTIVE SHIPMENTS</span>
+          <span className="kpiIcon">S</span>
+        </div>
+        <div className="kpiValue">128</div>
+        <div className="kpiChange">Sample data</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">AVG TRANSIT TIME</span>
+          <span className="kpiIcon">T</span>
+        </div>
+        <div className="kpiValue">3.8 days</div>
+        <div className="kpiChange">Sample data</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">OPEN EXCEPTIONS</span>
+          <span className="kpiIcon">!</span>
+        </div>
+        <div className="kpiValue">12</div>
+        <div className="kpiChange">Sample data - review required</div>
+      </div>
+    </section>
+
+    <section
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+        gap: "16px",
+        marginBottom: "20px",
+      }}
+    >
+      <div className="card" style={{ padding: "20px", minWidth: 0 }}>
+        <div className="cardTitle">On-Time Delivery Trend</div>
+        <div className="cardMeta">
+          Illustrative monthly performance
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            gap: "12px",
+            height: "190px",
+            marginTop: "24px",
+          }}
+        >
+          {[
+            { month: "May", rate: 91 },
+            { month: "Jun", rate: 93 },
+            { month: "Jul", rate: 92 },
+            { month: "Aug", rate: 95 },
+            { month: "Sep", rate: 94 },
+            { month: "Oct", rate: 94.2 },
+          ].map((item) => (
+            <div
+              key={item.month}
+              style={{
+                flex: 1,
+                minWidth: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "8px",
+                height: "100%",
+                justifyContent: "flex-end",
+              }}
+            >
+              <span style={{ fontSize: "11px", fontWeight: 600 }}>
+                {item.rate}%
+              </span>
+              <div
+                style={{
+                  width: "100%",
+                  height: `${item.rate * 1.25}px`,
+                  maxHeight: "140px",
+                  background: "#dc2626",
+                  borderRadius: "5px 5px 0 0",
+                }}
+              />
+              <span style={{ fontSize: "12px", color: "#777" }}>
+                {item.month}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="card" style={{ padding: "20px", minWidth: 0 }}>
+        <div className="cardTitle">Shipment Mode Mix</div>
+        <div className="cardMeta">
+          Illustrative distribution by transport mode
+        </div>
+
+        <div style={{ display: "grid", gap: "22px", marginTop: "26px" }}>
+          {[
+            { mode: "Sea Freight", share: 42 },
+            { mode: "Air Freight", share: 34 },
+            { mode: "Land Freight", share: 24 },
+          ].map((item) => (
+            <div key={item.mode}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "10px",
+                  marginBottom: "8px",
+                }}
+              >
+                <span>{item.mode}</span>
+                <strong>{item.share}%</strong>
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "9px",
+                  background: "#ededed",
+                  borderRadius: "10px",
+                  overflow: "hidden",
+                }}
+              >
+                <div
+                  style={{
+                    width: `${item.share}%`,
+                    height: "100%",
+                    background: "#dc2626",
+                    borderRadius: "10px",
+                  }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="cardMeta" style={{ marginTop: "22px" }}>
+          Sample distribution - not connected to live shipments.
+        </div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Route Performance</div>
+          <div className="cardMeta">
+            Design preview only - sample operational metrics
+          </div>
+        </div>
+        <span className="muted">Lane analysis</span>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Route</th>
+              <th>Mode</th>
+              <th>Shipments</th>
+              <th>On-Time Rate</th>
+              <th>Avg Transit</th>
+              <th>Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                route: "Riyadh - Dubai",
+                mode: "Air",
+                shipments: 42,
+                onTime: "96%",
+                transit: "1.4 days",
+                status: "On Target",
+              },
+              {
+                route: "Shanghai - Jeddah",
+                mode: "Sea",
+                shipments: 31,
+                onTime: "91%",
+                transit: "18 days",
+                status: "Monitor",
+              },
+              {
+                route: "Riyadh - Dammam",
+                mode: "Land",
+                shipments: 26,
+                onTime: "89%",
+                transit: "1.1 days",
+                status: "Review",
+              },
+            ]
+              .filter((item) =>
+                `${item.route} ${item.mode} ${item.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((item) => (
+                <tr key={item.route}>
+                  <td className="customer">{item.route}</td>
+                  <td>{item.mode}</td>
+                  <td>{item.shipments}</td>
+                  <td>{item.onTime}</td>
+                  <td>{item.transit}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        item.status === "On Target"
+                          ? "onTime"
+                          : item.status === "Review"
+                          ? "delayed"
+                          : "transit"
+                      }`}
+                    >
+                      {item.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section className="card tableCard" style={{ padding: "20px" }}>
+      <div className="cardTitle">Decision Support Preview</div>
+      <div className="cardMeta">
+        Illustrative insights - not generated from live data or active AI.
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "20px",
+          marginTop: "22px",
+        }}
+      >
+        <div>
+          <strong>Delay Risk</strong>
+          <p className="muted">
+            Highlight routes where late deliveries may increase.
+          </p>
+        </div>
+        <div>
+          <strong>Transit Time Variance</strong>
+          <p className="muted">
+            Compare actual transit time against planned service levels.
+          </p>
+        </div>
+        <div>
+          <strong>Human Review</strong>
+          <p className="muted">
+            Present exceptions for team review before operational action.
+          </p>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
     <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
