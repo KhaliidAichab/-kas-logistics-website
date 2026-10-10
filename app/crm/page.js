@@ -1212,7 +1212,157 @@ onClick={() => {
             </div>
           </section>
   )}
-          <div className="footerNote">
+      
+{active === "Quotes" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">TOTAL REQUESTS</span>
+          <span className="kpiIcon">Q</span>
+        </div>
+        <div className="kpiValue">36</div>
+        <div className="kpiChange">Sample data</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">NEW</span>
+          <span className="kpiIcon">N</span>
+        </div>
+        <div className="kpiValue">12</div>
+        <div className="kpiChange">Sample data</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">UNDER REVIEW</span>
+          <span className="kpiIcon">R</span>
+        </div>
+        <div className="kpiValue">8</div>
+        <div className="kpiChange">Sample data</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">CONVERTED</span>
+          <span className="kpiIcon">C</span>
+        </div>
+        <div className="kpiValue">9</div>
+        <div className="kpiChange">Sample data</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Quote Requests</div>
+          <div className="cardMeta">
+            Design preview only - sample records, not live customer data
+          </div>
+        </div>
+        <div className="cardMeta">Latest requests</div>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Quote ID</th>
+              <th>Company</th>
+              <th>Origin</th>
+              <th>Destination</th>
+              <th>Service</th>
+              <th>Submitted</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {[
+              {
+                id: "QT-26041",
+                company: "Al Noor Trading",
+                origin: "Riyadh, SA",
+                destination: "Dubai, UAE",
+                service: "Air Freight",
+                submitted: "10 Oct 2026",
+                status: "New",
+              },
+              {
+                id: "QT-26040",
+                company: "Gulf Industries",
+                origin: "Dammam, SA",
+                destination: "Jeddah, SA",
+                service: "Land Freight",
+                submitted: "09 Oct 2026",
+                status: "Under Review",
+              },
+              {
+                id: "QT-26039",
+                company: "BlueWave Retail",
+                origin: "Shanghai, CN",
+                destination: "Jeddah, SA",
+                service: "Sea Freight",
+                submitted: "08 Oct 2026",
+                status: "Quoted",
+              },
+              {
+                id: "QT-26038",
+                company: "MedCare Supply",
+                origin: "Dubai, UAE",
+                destination: "Riyadh, SA",
+                service: "Air Freight",
+                submitted: "07 Oct 2026",
+                status: "Converted",
+              },
+              {
+                id: "QT-26037",
+                company: "Riyadh Manufacturing",
+                origin: "Riyadh, SA",
+                destination: "Kuwait City, KW",
+                service: "Land Freight",
+                submitted: "06 Oct 2026",
+                status: "Rejected",
+              },
+            ]
+              .filter((quote) =>
+                `${quote.id} ${quote.company} ${quote.origin} ${quote.destination} ${quote.service} ${quote.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((quote) => (
+                <tr key={quote.id}>
+                  <td className="shipmentId">{quote.id}</td>
+                  <td className="customer">{quote.company}</td>
+                  <td className="muted">{quote.origin}</td>
+                  <td className="muted">{quote.destination}</td>
+                  <td>{quote.service}</td>
+                  <td>{quote.submitted}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        quote.status === "New" ||
+                        quote.status === "Under Review"
+                          ? "transit"
+                          : quote.status === "Rejected"
+                          ? "delayed"
+                          : "onTime"
+                      }`}
+                    >
+                      {quote.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </>
+)}
+    
+    <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
           </div>
