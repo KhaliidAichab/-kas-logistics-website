@@ -43,7 +43,7 @@ export async function POST(request) {
         method: "POST",
         headers: {
           apikey: secretKey,
-          Authorization: `Bearer ${secretKey}`,
+          ...(secretKey.startsWith("sb_secret_") ? {} : { Authorization: `Bearer ${secretKey}` }),
           "Content-Type": "application/json",
           Prefer: "return=representation",
         },
