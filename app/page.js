@@ -502,10 +502,10 @@ async function submitQuote() {
               ← Back
             </button>
 
-            <button
+                        <button
+              type="button"
               className="primaryBtn"
-              onClick={submitQuote}
-disabled={quoteSubmitting}
+              onClick={nextQuoteStep}
             >
               Continue →
             </button>
