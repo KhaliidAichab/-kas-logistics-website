@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const services = [
   ["01", "Air Freight", "Fast, reliable air cargo solutions for time-sensitive shipments."],
@@ -21,6 +21,21 @@ const industries = [
 ];
 
 export default function Home() {
+    useEffect(() => {
+    const reportError = (event) => {
+      window.alert(
+        "JavaScript error: " +
+        event.message +
+        "\nLine: " + event.lineno
+      );
+    };
+
+    window.addEventListener("error", reportError);
+
+    return () => {
+      window.removeEventListener("error", reportError);
+    };
+  }, []);
   const [menu, setMenu] = useState(false);
   const [lang, setLang] = useState("EN");
   const [tracking, setTracking] = useState("");
