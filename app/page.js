@@ -196,7 +196,7 @@ async function submitQuote() {
             {trackResult && (
               <div className="trackResult">
                 <b>{tracking.toUpperCase()}</b>
-                <span>â Tracking reference received</span>
+                <span>Tracking reference received</span>
                 <small>Connect this form to the production tracking API when credentials are available.</small>
               </div>
             )}
