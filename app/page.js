@@ -74,9 +74,20 @@ function updateQuote(field, value) {
 }
 
 function nextQuoteStep() {
+  setQuoteError("");
+  if (
+    quoteStep === 1 &&
+    (!quoteData.origin.trim() || !quoteData.destination.trim())
+  ) {
+    setQuoteError(
+      ar
+        ? "يرجى إدخال مدينة المنشأ والوجهة."
+        : "Please enter both origin and destination."
+    );
+    return;
+  }
   setQuoteStep((prev) => Math.min(prev + 1, 4));
 }
-
 function previousQuoteStep() {
   setQuoteStep((prev) => Math.max(prev - 1, 1));
   {
