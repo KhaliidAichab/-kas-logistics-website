@@ -477,8 +477,20 @@ setLiveShipments(mappedShipments);
         }
 
         .tableWrap {
-          overflow-x: auto;
-        }
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+.tableWrap table {
+  width: 100%;
+  min-width: 760px;
+}
 
         table {
           width: 100%;
