@@ -866,6 +866,147 @@ z-index: 100;
   </>
 )}
 
+{active === "Bookings" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">TOTAL BOOKINGS</span>
+          <span className="kpiIcon">B</span>
+        </div>
+        <div className="kpiValue">48</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">CONFIRMED</span>
+          <span className="kpiIcon">C</span>
+        </div>
+        <div className="kpiValue">31</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">PENDING REVIEW</span>
+          <span className="kpiIcon">P</span>
+        </div>
+        <div className="kpiValue">12</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">CANCELLED</span>
+          <span className="kpiIcon">X</span>
+        </div>
+        <div className="kpiValue">5</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Booking Management</div>
+          <div className="cardMeta">
+            Design preview only - sample records, not live data
+          </div>
+        </div>
+        <span className="muted">Recent bookings</span>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Customer</th>
+              <th>Service</th>
+              <th>Route</th>
+              <th>Booking Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {[
+              {
+                id: "BK-26016",
+                customer: "Northstar Retail",
+                service: "Air Freight",
+                route: "Riyadh - London",
+                date: "10 Oct 2026",
+                status: "Confirmed",
+              },
+              {
+                id: "BK-26015",
+                customer: "Eastern Gate Trading",
+                service: "Sea Freight",
+                route: "Shanghai - Jeddah",
+                date: "09 Oct 2026",
+                status: "Pending",
+              },
+              {
+                id: "BK-26014",
+                customer: "BlueLine Medical",
+                service: "Air Freight",
+                route: "Dubai - Riyadh",
+                date: "08 Oct 2026",
+                status: "Confirmed",
+              },
+              {
+                id: "BK-26013",
+                customer: "Summit Industrial",
+                service: "Land Freight",
+                route: "Riyadh - Dammam",
+                date: "07 Oct 2026",
+                status: "In Review",
+              },
+              {
+                id: "BK-26012",
+                customer: "Cedar Home Supply",
+                service: "Warehousing",
+                route: "Riyadh",
+                date: "06 Oct 2026",
+                status: "Cancelled",
+              },
+            ]
+              .filter((booking) =>
+                `${booking.id} ${booking.customer} ${booking.service} ${booking.route} ${booking.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((booking) => (
+                <tr key={booking.id}>
+                  <td className="shipmentId">{booking.id}</td>
+                  <td className="customer">{booking.customer}</td>
+                  <td>{booking.service}</td>
+                  <td className="muted">{booking.route}</td>
+                  <td>{booking.date}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        booking.status === "Confirmed"
+                          ? "onTime"
+                          : booking.status === "Cancelled"
+                          ? "delayed"
+                          : "transit"
+                      }`}
+                    >
+                      {booking.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </>
+)}
+
 {active === "Leads" && (
   <>
     <section className="kpis">
