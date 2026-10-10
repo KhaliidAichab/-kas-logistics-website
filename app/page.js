@@ -412,7 +412,7 @@ async function submitQuote() {
 
           <button
             className="primaryBtn fullBtn"
-            onClick={nextQuoteStep}
+            Restore quote step navigation
           >
             Continue →
           </button>
