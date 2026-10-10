@@ -21,9 +21,7 @@ const industries = [
 ];
 
 export default function Home() {
-  
   const [menu, setMenu] = useState(false);
-  const [lang, setLang] = useState("EN");
   const [tracking, setTracking] = useState("");
   const [trackResult, setTrackResult] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
@@ -46,7 +44,6 @@ const [quoteData, setQuoteData] = useState({
   phone: "",
   notes: "",
 });
-  const ar = lang === "AR";
 
   function submitTrack(e) {
     e.preventDefault();
@@ -66,21 +63,22 @@ function nextQuoteStep() {
     (!quoteData.origin.trim() || !quoteData.destination.trim())
   ) {
     setQuoteError(
-      ar
-        ? "يرجى إدخال مدينة المنشأ والوجهة."
-        : "Please enter both origin and destination."
+      "Please enter both origin and destination."
     );
     return;
   }
   setQuoteStep((prev) => Math.min(prev + 1, 4));
 }
+
 function previousQuoteStep() {
+  setQuoteError("");
   setQuoteStep((prev) => Math.max(prev - 1, 1));
-  {
+}
+
 async function submitQuote() {
   setQuoteError("");
 
-   if (
+  if (
     !quoteData.origin.trim() ||
     !quoteData.destination.trim() ||
     !quoteData.cargoType ||
@@ -90,17 +88,13 @@ async function submitQuote() {
     !quoteData.phone.trim()
   ) {
     setQuoteError(
-      ar
-        ? "يرجى تعبئة المنشأ والوجهة وبيانات الاتصال المطلوبة."
-        : "Please complete origin, destination, and all required contact fields."
+      "Please complete origin, destination, and all required contact fields."
     );
     return;
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(quoteData.email.trim())) {
     setQuoteError(
-      ar
-        ? "يرجى إدخال بريد إلكتروني صحيح."
-        : "Please enter a valid email address."
+      "Please enter a valid email address."
     );
     return;
   }
@@ -122,9 +116,7 @@ async function submitQuote() {
       console.error("Quote submission failed:", result);
 
       setQuoteError(
-        ar
-          ? "تعذر حفظ الطلب. يرجى المحاولة لاحقًا."
-          : "Unable to save the request. Please try again."
+        "Unable to save the request. Please try again."
       );
       return;
     }
@@ -134,9 +126,7 @@ async function submitQuote() {
     console.error("Quote submission failed:", error);
 
     setQuoteError(
-      ar
-        ? "تعذر الاتصال بالخادم."
-        : "Unable to connect to the server."
+      "Unable to connect to the server."
     );
   } finally {
     setQuoteSubmitting(false);
@@ -144,7 +134,7 @@ async function submitQuote() {
 }
 
   return (
-    <main className={ar ? "site rtl" : "site"}>
+    <main className="site">
       <header className="header">
         <div className="container nav">
           <a href="#top" className="logoWrap" aria-label="KAS Logistics">
@@ -152,17 +142,16 @@ async function submitQuote() {
           </a>
 
           <nav className={menu ? "navLinks open" : "navLinks"}>
-            <a href="#services" onClick={() => setMenu(false)}>{ar ? "الخدمات" : "Services"}</a>
-            <a href="#industries" onClick={() => setMenu(false)}>{ar ? "القطاعات" : "Industries"}</a>
-            <a href="#network" onClick={() => setMenu(false)}>{ar ? "الشبكة" : "Global Network"}</a>
-            <a href="#digital" onClick={() => setMenu(false)}>{ar ? "الحلول الرقمية" : "Digital Solutions"}</a>
-            <a href="#about" onClick={() => setMenu(false)}>{ar ? "عن KAS" : "About KAS"}</a>
-            <a href="#contact" onClick={() => setMenu(false)}>{ar ? "تواصل" : "Contact"}</a>
+            <a href="#services" onClick={() => setMenu(false)}>Services</a>
+            <a href="#industries" onClick={() => setMenu(false)}>Industries</a>
+            <a href="#network" onClick={() => setMenu(false)}>Global Network</a>
+            <a href="#digital" onClick={() => setMenu(false)}>Digital Solutions</a>
+            <a href="#about" onClick={() => setMenu(false)}>About KAS</a>
+            <a href="#contact" onClick={() => setMenu(false)}>Contact</a>
           </nav>
 
           <div className="navActions">
-            <button className="langBtn" onClick={() => setLang(ar ? "EN" : "AR")}>{ar ? "EN" : "AR"} ↗</button>
-            <button className="quoteBtn" onClick={() => setQuoteOpen(true)}>{ar ? "اطلب عرض سعر" : "Get a Quote"} →</button>
+            <button className="quoteBtn" onClick={() => setQuoteOpen(true)}>Get a Quote â</button>
             <button className="menuBtn" onClick={() => setMenu(!menu)} aria-label="Menu">
               <span></span><span></span><span></span>
             </button>
@@ -175,23 +164,21 @@ async function submitQuote() {
         <div className="heroShade"></div>
         <div className="container heroGrid">
           <div className="heroCopy">
-            <div className="eyebrow"><i></i>{ar ? "خدمات لوجستية تتجاوز الحدود" : "LOGISTICS BEYOND BORDERS"}</div>
+            <div className="eyebrow"><i></i>LOGISTICS BEYOND BORDERS</div>
             <h1>
-              {ar ? <>نحرّك ما<br /><span>يحرّك العالم.</span></> : <>WE MOVE WHAT<br /><span>MOVES THE WORLD.</span></>}
+              <>WE MOVE WHAT<br /><span>MOVES THE WORLD.</span></>
             </h1>
             <p className="heroLead">
-              {ar
-                ? "حلول لوجستية متكاملة تربط الشرق الأوسط وأفريقيا بالعالم، مبنية على الرؤية والموثوقية وطريقة تحرك أعمالك."
-                : "End-to-end logistics connecting the Middle East, Africa and the world. Built around visibility, reliability and the way your business moves."}
+              End-to-end logistics connecting the Middle East, Africa and the world. Built around visibility, reliability and the way your business moves.
             </p>
             <div className="heroButtons">
-              <button className="primaryBtn" onClick={() => setQuoteOpen(true)}>{ar ? "اطلب عرض سعر" : "Get a Quote"} →</button>
-              <a className="ghostBtn" href="#tracking">{ar ? "تتبع شحنتك" : "Track Shipment"} ↗</a>
+              <button className="primaryBtn" onClick={() => setQuoteOpen(true)}>Get a Quote â</button>
+              <a className="ghostBtn" href="#tracking">Track Shipment â</a>
             </div>
             <div className="heroMeta">
-              <div><strong>2023</strong><span>{ar ? "تأسست في الرياض" : "Founded in Riyadh"}</span></div>
-              <div><strong>7+</strong><span>{ar ? "أسواق ضمن الشبكة" : "Network markets"}</span></div>
-              <div><strong>MENA</strong><span>{ar ? "الشرق الأوسط وأفريقيا" : "Core region"}</span></div>
+              <div><strong>2023</strong><span>Founded in Riyadh</span></div>
+              <div><strong>7+</strong><span>Network markets</span></div>
+              <div><strong>MENA</strong><span>Core region</span></div>
             </div>
           </div>
 
@@ -204,12 +191,12 @@ async function submitQuote() {
             </div>
             <form className="trackForm" onSubmit={submitTrack}>
               <input value={tracking} onChange={(e) => setTracking(e.target.value)} placeholder="Enter tracking number" />
-              <button>TRACK →</button>
+              <button>TRACK â</button>
             </form>
             {trackResult && (
               <div className="trackResult">
                 <b>{tracking.toUpperCase()}</b>
-                <span>● Tracking reference received</span>
+                <span>â Tracking reference received</span>
                 <small>Connect this form to the production tracking API when credentials are available.</small>
               </div>
             )}
@@ -234,17 +221,17 @@ async function submitQuote() {
       <section id="services" className="section servicesSection">
         <div className="container">
           <div className="sectionHead">
-            <div><div className="kicker">OUR SERVICES</div><h2>{ar ? "حلول لوجستية من البداية إلى النهاية" : "End-to-End Logistics Solutions"}</h2></div>
-            <p>{ar ? "شبكة متكاملة من الشحن والتخزين والمشاريع والحلول الرقمية تحت مظلة واحدة." : "A connected portfolio of freight, warehousing, project logistics and digital solutions under one roof."}</p>
+            <div><div className="kicker">OUR SERVICES</div><h2>End-to-End Logistics Solutions</h2></div>
+            <p>A connected portfolio of freight, warehousing, project logistics and digital solutions under one roof.</p>
           </div>
           <div className="serviceGrid">
             {services.map(([n, title, text]) => (
               <article className="serviceCard" key={n}>
                 <span className="serviceNo">{n}</span>
                 <div className="serviceIcon">{n}</div>
-                <h3>{ar ? title : title}</h3>
+                <h3>{title}</h3>
                 <p>{text}</p>
-                <a href="#contact">Explore →</a>
+                <a href="#contact">Explore â</a>
               </article>
             ))}
           </div>
@@ -260,7 +247,7 @@ async function submitQuote() {
           <div className="industryGrid">
             {industries.map(([title, text], i) => (
               <article className="industryCard" key={title}>
-                <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><a href="#contact">View capability →</a>
+                <span>0{i + 1}</span><h3>{title}</h3><p>{text}</p><a href="#contact">View capability â</a>
               </article>
             ))}
           </div>
@@ -276,7 +263,7 @@ async function submitQuote() {
             <div className="networkBullets">
               <span>Saudi Arabia</span><span>UAE</span><span>Kenya</span><span>South Africa</span><span>Namibia</span><span>Sudan</span><span>Rwanda</span>
             </div>
-            <a className="primaryBtn inlineBtn" href="#contact">Explore Our Network →</a>
+            <a className="primaryBtn inlineBtn" href="#contact">Explore Our Network â</a>
           </div>
           <div className="networkMap">
             <div className="mapGrid"></div>
@@ -310,7 +297,7 @@ async function submitQuote() {
             </div>
           </div>
           <div className="dashboard">
-            <div className="dashTop"><b>KAS CONTROL TOWER</b><span>● SYSTEM ONLINE</span></div>
+            <div className="dashTop"><b>KAS CONTROL TOWER</b><span>â SYSTEM ONLINE</span></div>
             <div className="dashCards"><div><small>ACTIVE</small><strong>LIVE</strong></div><div><small>ROUTES</small><strong>07</strong></div><div><small>STATUS</small><strong>98%</strong></div></div>
             <div className="dashChart"><div className="chartLine"></div><div className="chartLine second"></div><span>VISIBILITY / TIME</span></div>
             <div className="dashRows"><div><span>Origin gateway</span><b>Confirmed</b></div><div><span>In transit</span><b>Live</b></div><div><span>Destination</span><b>Scheduled</b></div></div>
@@ -321,14 +308,14 @@ async function submitQuote() {
       <section id="about" className="section aboutSection">
         <div className="container aboutGrid">
           <div><div className="kicker">KAS LOGISTICS SERVICES</div><h2>Your cargo. Our commitment.</h2></div>
-          <div><p>Founded in 2023 and headquartered in Riyadh, KAS is built to connect global supply chains with the Middle East and Africa through reliable, efficient and increasingly digital logistics solutions.</p><a className="ghostBtn darkText" href="#contact">About KAS →</a></div>
+          <div><p>Founded in 2023 and headquartered in Riyadh, KAS is built to connect global supply chains with the Middle East and Africa through reliable, efficient and increasingly digital logistics solutions.</p><a className="ghostBtn darkText" href="#contact">About KAS â</a></div>
         </div>
       </section>
 
       <section id="contact" className="section ctaSection">
         <div className="container cta">
           <div><div className="kicker light">YOUR CARGO. OUR COMMITMENT.</div><h2>Ready to move what moves your business?</h2></div>
-          <div><p>Tell KAS where your cargo starts, where it needs to go and what matters most.</p><button className="whiteBtn" onClick={() => setQuoteOpen(true)}>Get a Quote →</button></div>
+          <div><p>Tell KAS where your cargo starts, where it needs to go and what matters most.</p><button className="whiteBtn" onClick={() => setQuoteOpen(true)}>Get a Quote â</button></div>
         </div>
       </section>
 
@@ -337,9 +324,9 @@ async function submitQuote() {
           <div><img src="/kas-logo.png" alt="KAS Logistics Services" /><p>Connected logistics across the Middle East, Africa and global supply chains.</p><p>info@kaslogistic.com<br/>sales@kaslogistic.com</p></div>
           <div><b>SOLUTIONS</b><a href="#services">Air Freight</a><a href="#services">Sea Freight</a><a href="#services">Land Freight</a><a href="#services">Warehousing</a></div>
           <div><b>DIGITAL</b><a href="#digital">Control Tower</a><a href="#tracking">Tracking</a><a href="#digital">Digital Quote</a><a href="#digital">Operations</a></div>
-          <div><b>COMPANY</b><a href="#about">About KAS</a><a href="#network">Network</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div>
+          <div><b>COMPANY</b><a href="#about">About KAS</a><a href="#network">Network</a><a href="#contact">Contact</a><a href="#top">Back to top â</a></div>
         </div>
-        <div className="container footerBottom"><span>© KAS Logistics Services</span><span>Riyadh, Saudi Arabia</span></div>
+        <div className="container footerBottom"><span>Â© KAS Logistics Services</span><span>Riyadh, Saudi Arabia</span></div>
       </footer>
 
       {quoteOpen && (
@@ -358,7 +345,7 @@ async function submitQuote() {
           setQuoteStep(1);
         }}
       >
-        ×
+        Ã
       </button>
 
       <div className="kicker">KAS QUOTE</div>
@@ -372,11 +359,13 @@ async function submitQuote() {
         <i />
         <span className={quoteStep >= 4 ? "active" : ""}>04</span>
       </div>
+
       {quoteError && (
         <p role="alert" className="quoteError">
           {quoteError}
         </p>
       )}
+
       {quoteStep === 1 && (
         <>
           <h2>Tell us what needs to move.</h2>
@@ -437,12 +426,12 @@ async function submitQuote() {
             </label>
           </div>
 
-                    <button
+          <button
             type="button"
             className="primaryBtn fullBtn"
             onClick={nextQuoteStep}
           >
-            Continue →
+            Continue â
           </button>
         </>
       )}
@@ -480,7 +469,7 @@ async function submitQuote() {
                 onChange={(e) =>
                   updateQuote("dimensions", e.target.value)
                 }
-                placeholder="L × W × H"
+                placeholder="L Ã W Ã H"
               />
             </label>
 
@@ -512,15 +501,15 @@ async function submitQuote() {
               className="ghostBtn"
               onClick={previousQuoteStep}
             >
-              ← Back
+              â Back
             </button>
 
-                        <button
+            <button
               type="button"
               className="primaryBtn"
               onClick={nextQuoteStep}
             >
-              Continue →
+              Continue â
             </button>
           </div>
         </>
@@ -586,16 +575,16 @@ async function submitQuote() {
               className="ghostBtn"
               onClick={previousQuoteStep}
             >
-              ← Back
+              â Back
             </button>
 
-                        <button
+            <button
               type="button"
               className="primaryBtn"
               onClick={submitQuote}
               disabled={quoteSubmitting}
             >
-              {quoteSubmitting ? "Sending…" : "Request a Quote →"}
+              {quoteSubmitting ? "Sendingâ¦" : "Request a Quote â"}
             </button>
           </div>
         </>
@@ -603,7 +592,7 @@ async function submitQuote() {
 
       {quoteStep === 4 && (
         <div className="quoteSuccess">
-          <div className="successMark">✓</div>
+          <div className="successMark">â</div>
 
           <h2>Quote request received.</h2>
 
@@ -616,7 +605,7 @@ async function submitQuote() {
             <div>
               <span>Route</span>
               <strong>
-                {quoteData.origin || "—"} → {quoteData.destination || "—"}
+                {quoteData.origin || "â"} â {quoteData.destination || "â"}
               </strong>
             </div>
 
