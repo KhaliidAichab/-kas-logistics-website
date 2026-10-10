@@ -425,9 +425,10 @@ async function submitQuote() {
             </label>
           </div>
 
-          <button
+                    <button
+            type="button"
             className="primaryBtn fullBtn"
-            Restore quote step navigation
+            onClick={nextQuoteStep}
           >
             Continue →
           </button>
