@@ -1977,6 +1977,196 @@ onClick={() => {
   </>
 )}
 
+{active === "Finance" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">TOTAL REVENUE</span>
+          <span className="kpiIcon">R</span>
+        </div>
+        <div className="kpiValue">SAR 2.4M</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">OUTSTANDING</span>
+          <span className="kpiIcon">O</span>
+        </div>
+        <div className="kpiValue">SAR 380K</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">PAID INVOICES</span>
+          <span className="kpiIcon">P</span>
+        </div>
+        <div className="kpiValue">184</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">OVERDUE</span>
+          <span className="kpiIcon">!</span>
+        </div>
+        <div className="kpiValue">12</div>
+        <div className="kpiChange">Requires attention</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Invoice Register</div>
+          <div className="cardMeta">
+            Design preview only - sample financial records
+          </div>
+        </div>
+        <span className="muted">Accounts receivable</span>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Invoice ID</th>
+              <th>Customer</th>
+              <th>Shipment</th>
+              <th>Issue Date</th>
+              <th>Due Date</th>
+              <th>Amount (SAR)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                id: "INV-26107",
+                customer: "Northstar Retail",
+                shipment: "KAS-26081",
+                issue: "10 Oct 2026",
+                due: "24 Oct 2026",
+                amount: "18,500",
+                status: "Paid",
+              },
+              {
+                id: "INV-26106",
+                customer: "Eastern Gate Trading",
+                shipment: "KAS-26082",
+                issue: "09 Oct 2026",
+                due: "23 Oct 2026",
+                amount: "42,000",
+                status: "Pending",
+              },
+              {
+                id: "INV-26105",
+                customer: "BlueLine Medical",
+                shipment: "KAS-26083",
+                issue: "01 Oct 2026",
+                due: "09 Oct 2026",
+                amount: "12,800",
+                status: "Overdue",
+              },
+              {
+                id: "INV-26104",
+                customer: "Summit Industrial",
+                shipment: "KAS-26084",
+                issue: "08 Oct 2026",
+                due: "22 Oct 2026",
+                amount: "26,400",
+                status: "Pending",
+              },
+              {
+                id: "INV-26103",
+                customer: "Cedar Home Supply",
+                shipment: "KAS-26085",
+                issue: "05 Oct 2026",
+                due: "19 Oct 2026",
+                amount: "9,750",
+                status: "Paid",
+              },
+            ]
+              .filter((invoice) =>
+                `${invoice.id} ${invoice.customer} ${invoice.shipment} ${invoice.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((invoice) => (
+                <tr key={invoice.id}>
+                  <td className="shipmentId">{invoice.id}</td>
+                  <td className="customer">{invoice.customer}</td>
+                  <td className="muted">{invoice.shipment}</td>
+                  <td>{invoice.issue}</td>
+                  <td>{invoice.due}</td>
+                  <td>{invoice.amount}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        invoice.status === "Paid"
+                          ? "onTime"
+                          : invoice.status === "Overdue"
+                          ? "delayed"
+                          : "transit"
+                      }`}
+                    >
+                      {invoice.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Financial Operations</div>
+          <div className="cardMeta">
+            Planned capabilities - not active in this preview
+          </div>
+        </div>
+      </div>
+
+      <div style={{
+        padding: "20px",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+        gap: "16px"
+      }}>
+        <div>
+          <strong>Accounts Receivable</strong>
+          <div className="muted">
+            Monitor customer balances and outstanding invoices.
+          </div>
+        </div>
+        <div>
+          <strong>Payment Reconciliation</strong>
+          <div className="muted">
+            Prepare to match receipts against invoices.
+          </div>
+        </div>
+        <div>
+          <strong>Overdue Monitoring</strong>
+          <div className="muted">
+            Identify overdue invoices for follow-up.
+          </div>
+        </div>
+        <div>
+          <strong>Financial Reporting</strong>
+          <div className="muted">
+            Prepare revenue and receivables reporting.
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
     <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
