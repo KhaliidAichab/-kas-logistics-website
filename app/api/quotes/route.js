@@ -9,10 +9,14 @@ export async function POST(request) {
     const body = await request.json();
 
     const requiredFields = [
-      "cargoType",
-      "company",
-      "phone",
-    ];
+  "origin",
+  "destination",
+  "cargoType",
+  "company",
+  "name",
+  "email",
+  "phone",
+];
 
     for (const field of requiredFields) {
       if (
