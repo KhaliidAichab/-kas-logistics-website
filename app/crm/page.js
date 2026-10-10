@@ -1784,6 +1784,199 @@ onClick={() => {
   </>
 )}
 
+{active === "Documents" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">TOTAL DOCUMENTS</span>
+          <span className="kpiIcon">D</span>
+        </div>
+        <div className="kpiValue">286</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">APPROVED</span>
+          <span className="kpiIcon">A</span>
+        </div>
+        <div className="kpiValue">214</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">PENDING REVIEW</span>
+          <span className="kpiIcon">P</span>
+        </div>
+        <div className="kpiValue">18</div>
+        <div className="kpiChange">Awaiting review</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">EXPIRING SOON</span>
+          <span className="kpiIcon">!</span>
+        </div>
+        <div className="kpiValue">7</div>
+        <div className="kpiChange">Requires attention</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Document Register</div>
+          <div className="cardMeta">
+            Design preview only - sample records, not live data
+          </div>
+        </div>
+        <span className="muted">Document lifecycle</span>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Document</th>
+              <th>Shipment / Customer</th>
+              <th>Last Updated</th>
+              <th>Expiry Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                id: "DOC-26107",
+                name: "Bill of Lading",
+                shipment: "KAS-26081",
+                customer: "Northstar Retail",
+                updated: "10 Oct 2026",
+                expiry: "12 Oct 2026",
+                status: "Approved",
+              },
+              {
+                id: "DOC-26106",
+                name: "Commercial Invoice",
+                shipment: "KAS-26082",
+                customer: "Eastern Gate Trading",
+                updated: "10 Oct 2026",
+                expiry: "Not applicable",
+                status: "Pending Review",
+              },
+              {
+                id: "DOC-26105",
+                name: "Air Waybill",
+                shipment: "KAS-26083",
+                customer: "BlueLine Medical",
+                updated: "09 Oct 2026",
+                expiry: "12 Oct 2026",
+                status: "Expiring Soon",
+              },
+              {
+                id: "DOC-26104",
+                name: "Packing List",
+                shipment: "KAS-26084",
+                customer: "Summit Industrial",
+                updated: "08 Oct 2026",
+                expiry: "Not applicable",
+                status: "Approved",
+              },
+              {
+                id: "DOC-26103",
+                name: "Certificate of Origin",
+                shipment: "KAS-26085",
+                customer: "Cedar Home Supply",
+                updated: "07 Oct 2026",
+                expiry: "02 Oct 2026",
+                status: "Expired",
+              },
+            ]
+              .filter((doc) =>
+                `${doc.id} ${doc.name} ${doc.shipment} ${doc.customer} ${doc.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((doc) => (
+                <tr key={doc.id}>
+                  <td>
+                    <strong>{doc.name}</strong>
+                    <div className="muted">{doc.id}</div>
+                  </td>
+                  <td>
+                    <div>{doc.shipment}</div>
+                    <div className="muted">{doc.customer}</div>
+                  </td>
+                  <td>{doc.updated}</td>
+                  <td>{doc.expiry}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        doc.status === "Approved"
+                          ? "onTime"
+                          : doc.status === "Expired" ||
+                            doc.status === "Expiring Soon"
+                          ? "delayed"
+                          : "transit"
+                      }`}
+                    >
+                      {doc.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Digital Document Controls</div>
+          <div className="cardMeta">
+            Planned capabilities - not active in this preview
+          </div>
+        </div>
+      </div>
+
+      <div style={{
+        padding: "20px",
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+        gap: "16px"
+      }}>
+        <div>
+          <strong>Version History</strong>
+          <div className="muted">
+            Track document revisions and updates.
+          </div>
+        </div>
+        <div>
+          <strong>Audit Trail</strong>
+          <div className="muted">
+            Record approvals and document changes.
+          </div>
+        </div>
+        <div>
+          <strong>Expiry Monitoring</strong>
+          <div className="muted">
+            Identify documents requiring renewal.
+          </div>
+        </div>
+        <div>
+          <strong>Digital Integration</strong>
+          <div className="muted">
+            Prepare for secure APIs and digital shipping documents.
+          </div>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
     <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
