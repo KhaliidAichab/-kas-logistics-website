@@ -57,22 +57,34 @@ export async function POST(request) {
       }
     );
 
-    const result = await response.json();
+const result = await response.json();
 
-    if (!response.ok) {
-      return NextResponse.json(
-        { error: result },
-        { status: response.status }
-      );
-    }
+if (!response.ok) {
+  console.error("Supabase quote insert failed:", result);
 
-    return NextResponse.json(
-      {
-        success: true,
-        quote: result[0],
-      },
-      { status: 201 }
-    );
+  return NextResponse.json(
+    { success: false, error: result },
+    { status: response.status }
+  );
+}
+
+if (!Array.isArray(result) || result.length === 0) {
+  console.error("Supabase returned no inserted quote:", result);
+
+  return NextResponse.json(
+    { success: false, error: "No quote record returned" },
+    { status: 500 }
+  );
+}
+
+return NextResponse.json(
+  {
+    success: true,
+    quote: result[0],
+  },
+  { status: 201 }
+);
+
   } catch (error) {
     return NextResponse.json(
       { error: "Unable to process quote request" },
