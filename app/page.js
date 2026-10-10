@@ -64,6 +64,61 @@ function nextQuoteStep() {
 
 function previousQuoteStep() {
   setQuoteStep((prev) => Math.max(prev - 1, 1));
+  
+async function submitQuote() {
+  setQuoteError("");
+
+  if (
+    !quoteData.cargoType ||
+    !quoteData.company?.trim() ||
+    !quoteData.phone?.trim()
+  ) {
+    setQuoteError(
+      ar
+        ? "يرجى تعبئة نوع الشحنة واسم الشركة ورقم الهاتف."
+        : "Please enter cargo type, company, and phone number."
+    );
+    return;
+  }
+
+  setQuoteSubmitting(true);
+
+  try {
+    const response = await fetch("/api/quotes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(quoteData),
+    });
+
+    const result = await response.json().catch(() => ({}));
+
+    if (!response.ok || result.success !== true) {
+      console.error("Quote submission failed:", result);
+
+      setQuoteError(
+        ar
+          ? "تعذر حفظ الطلب. يرجى المحاولة لاحقًا."
+          : "Unable to save the request. Please try again."
+      );
+      return;
+    }
+
+    setQuoteStep(4);
+  } catch (error) {
+    console.error("Quote submission failed:", error);
+
+    setQuoteError(
+      ar
+        ? "تعذر الاتصال بالخادم."
+        : "Unable to connect to the server."
+    );
+  } finally {
+    setQuoteSubmitting(false);
+  }
+}
+
 }
   return (
     <main className={ar ? "site rtl" : "site"}>
