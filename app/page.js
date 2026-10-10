@@ -83,15 +83,27 @@ function previousQuoteStep() {
 async function submitQuote() {
   setQuoteError("");
 
-  if (
+   if (
+    !quoteData.origin.trim() ||
+    !quoteData.destination.trim() ||
     !quoteData.cargoType ||
-    !quoteData.company?.trim() ||
-    !quoteData.phone?.trim()
+    !quoteData.company.trim() ||
+    !quoteData.name.trim() ||
+    !quoteData.email.trim() ||
+    !quoteData.phone.trim()
   ) {
     setQuoteError(
       ar
-        ? "يرجى تعبئة نوع الشحنة واسم الشركة ورقم الهاتف."
-        : "Please enter cargo type, company, and phone number."
+        ? "يرجى تعبئة المنشأ والوجهة وبيانات الاتصال المطلوبة."
+        : "Please complete origin, destination, and all required contact fields."
+    );
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(quoteData.email.trim())) {
+    setQuoteError(
+      ar
+        ? "يرجى إدخال بريد إلكتروني صحيح."
+        : "Please enter a valid email address."
     );
     return;
   }
