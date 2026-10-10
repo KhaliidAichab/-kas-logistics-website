@@ -364,7 +364,11 @@ async function submitQuote() {
         <i />
         <span className={quoteStep >= 4 ? "active" : ""}>04</span>
       </div>
-
+      {quoteError && (
+        <p role="alert" className="quoteError">
+          {quoteError}
+        </p>
+      )}
       {quoteStep === 1 && (
         <>
           <h2>Tell us what needs to move.</h2>
