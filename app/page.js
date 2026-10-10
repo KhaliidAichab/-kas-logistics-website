@@ -606,7 +606,7 @@ async function submitQuote() {
             <div>
               <span>Route</span>
               <strong>
-                {quoteData.origin || "â"} â {quoteData.destination || "â"}
+                {quoteData.origin || "-"} to {quoteData.destination || "-"}
               </strong>
             </div>
 
