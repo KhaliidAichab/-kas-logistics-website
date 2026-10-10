@@ -27,7 +27,8 @@ export default function Home() {
   const [trackResult, setTrackResult] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
 const [quoteStep, setQuoteStep] = useState(1);
-
+const [quoteSubmitting, setQuoteSubmitting] = useState(false);
+const [quoteError, setQuoteError] = useState("");
 const [quoteData, setQuoteData] = useState({
   origin: "",
   destination: "",
