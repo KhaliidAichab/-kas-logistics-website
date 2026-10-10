@@ -191,7 +191,7 @@ async function submitQuote() {
             </div>
             <form className="trackForm" onSubmit={submitTrack}>
               <input value={tracking} onChange={(e) => setTracking(e.target.value)} placeholder="Enter tracking number" />
-              <button>TRACK â</button>
+              <button>TRACK</button>
             </form>
             {trackResult && (
               <div className="trackResult">
