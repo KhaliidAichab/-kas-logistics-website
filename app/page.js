@@ -576,16 +576,17 @@ async function submitQuote() {
               onClick={previousQuoteStep}
             >
               â Back
-            </button>
-
+            
+          
             <button
               type="button"
               className="primaryBtn"
               onClick={submitQuote}
               disabled={quoteSubmitting}
             >
-              {quoteSubmitting ? "Sendingâ¦" : "Request a Quote â"}
+              {quoteSubmitting ? "Sending…" : "Request a Quote →"}
             </button>
+
           </div>
         </>
       )}
