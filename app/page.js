@@ -576,12 +576,13 @@ disabled={quoteSubmitting}
               ← Back
             </button>
 
-            <button
-type="button"
+                        <button
+              type="button"
               className="primaryBtn"
-              onClick={nextQuoteStep}
+              onClick={submitQuote}
+              disabled={quoteSubmitting}
             >
-              Request a Quote →
+              {quoteSubmitting ? "Sending…" : "Request a Quote →"}
             </button>
           </div>
         </>
