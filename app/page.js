@@ -79,7 +79,7 @@ function nextQuoteStep() {
 
 function previousQuoteStep() {
   setQuoteStep((prev) => Math.max(prev - 1, 1));
-  
+  {
 async function submitQuote() {
   setQuoteError("");
 
