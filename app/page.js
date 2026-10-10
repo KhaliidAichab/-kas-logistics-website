@@ -593,7 +593,7 @@ async function submitQuote() {
 
       {quoteStep === 4 && (
         <div className="quoteSuccess">
-          <div className="successMark">â</div>
+          <div className="successMark">OK</div>
 
           <h2>Quote request received.</h2>
 
