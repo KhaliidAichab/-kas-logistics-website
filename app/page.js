@@ -489,7 +489,8 @@ async function submitQuote() {
 
             <button
               className="primaryBtn"
-              onClick={nextQuoteStep}
+              onClick={submitQuote}
+disabled={quoteSubmitting}
             >
               Continue →
             </button>
