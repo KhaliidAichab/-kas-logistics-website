@@ -134,7 +134,6 @@ async function submitQuote() {
   }
 }
 
-}
   return (
     <main className={ar ? "site rtl" : "site"}>
       <header className="header">
