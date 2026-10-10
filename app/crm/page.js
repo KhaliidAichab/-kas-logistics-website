@@ -1652,6 +1652,138 @@ onClick={() => {
   </>
 )}
     
+{active === "Control Tower" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">ACTIVE SHIPMENTS</span>
+          <span className="kpiIcon">A</span>
+        </div>
+        <div className="kpiValue">128</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">IN TRANSIT</span>
+          <span className="kpiIcon">T</span>
+        </div>
+        <div className="kpiValue">86</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">DELAYED</span>
+          <span className="kpiIcon">!</span>
+        </div>
+        <div className="kpiValue">12</div>
+        <div className="kpiChange">Requires attention</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">DELIVERED</span>
+          <span className="kpiIcon">D</span>
+        </div>
+        <div className="kpiValue">30</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Shipment Control Tower</div>
+          <div className="cardMeta">
+            Design preview only - sample records, not live data
+          </div>
+        </div>
+        <span className="muted">Operational overview</span>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Shipment ID</th>
+              <th>Customer</th>
+              <th>Route</th>
+              <th>Mode</th>
+              <th>ETA</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                id: "KAS-26081",
+                customer: "Northstar Retail",
+                route: "Riyadh - Dubai",
+                mode: "Air",
+                eta: "10 Oct 2026, 18:40",
+                status: "On Time",
+              },
+              {
+                id: "KAS-26082",
+                customer: "Eastern Gate Trading",
+                route: "Shanghai - Jeddah",
+                mode: "Sea",
+                eta: "14 Oct 2026",
+                status: "In Transit",
+              },
+              {
+                id: "KAS-26083",
+                customer: "BlueLine Medical",
+                route: "Riyadh - Dammam",
+                mode: "Land",
+                eta: "10 Oct 2026, 15:20",
+                status: "Delayed",
+              },
+              {
+                id: "KAS-26084",
+                customer: "Summit Industrial",
+                route: "Dubai - Riyadh",
+                mode: "Air",
+                eta: "11 Oct 2026",
+                status: "In Transit",
+              },
+            ]
+              .filter((shipment) =>
+                `${shipment.id} ${shipment.customer} ${shipment.route} ${shipment.mode} ${shipment.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((shipment) => (
+                <tr key={shipment.id}>
+                  <td className="shipmentId">{shipment.id}</td>
+                  <td className="customer">{shipment.customer}</td>
+                  <td className="muted">{shipment.route}</td>
+                  <td>{shipment.mode}</td>
+                  <td>{shipment.eta}</td>
+                  <td>
+                    <span
+                      className={`status ${
+                        shipment.status === "On Time"
+                          ? "onTime"
+                          : shipment.status === "Delayed"
+                          ? "delayed"
+                          : "transit"
+                      }`}
+                    >
+                      {shipment.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </>
+)}
+
     <div className="footerNote">
             KAS CRM • Demo interface • Connected data will be added in the
             backend phase
