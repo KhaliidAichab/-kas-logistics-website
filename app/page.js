@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const services = [
   ["01", "Air Freight", "Fast, reliable air cargo solutions for time-sensitive shipments."],
