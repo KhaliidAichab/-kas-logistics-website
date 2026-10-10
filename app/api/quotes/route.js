@@ -47,12 +47,23 @@ export async function POST(request) {
           "Content-Type": "application/json",
           Prefer: "return=representation",
         },
-        body: JSON.stringify({
-          cargo_type: body.cargoType,
-          company: body.company,
-          phone: body.phone,
-          pickup_date: body.pickupDate || null,
-        }),
+        
+body: JSON.stringify({
+  origin: body.origin,
+  destination: body.destination,
+  service: body.service,
+  cargo_type: body.cargoType,
+  weight: body.weight || null,
+  quantity: body.quantity || null,
+  dimensions: body.dimensions || null,
+  pickup_date: body.pickupDate || null,
+  company: body.company,
+  name: body.name || null,
+  email: body.email || null,
+  phone: body.phone,
+  notes: body.notes || null,
+}),
+
         cache: "no-store",
       }
     );
