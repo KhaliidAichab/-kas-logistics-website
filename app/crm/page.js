@@ -866,6 +866,155 @@ z-index: 100;
   </>
 )}
 
+{active === "Leads" && (
+  <>
+    <section className="kpis">
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">TOTAL LEADS</span>
+          <span className="kpiIcon">L</span>
+        </div>
+        <div className="kpiValue">42</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">NEW</span>
+          <span className="kpiIcon">N</span>
+        </div>
+        <div className="kpiValue">14</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">CONTACTED</span>
+          <span className="kpiIcon">C</span>
+        </div>
+        <div className="kpiValue">18</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+
+      <div className="kpi">
+        <div className="kpiTop">
+          <span className="kpiLabel">QUALIFIED</span>
+          <span className="kpiIcon">Q</span>
+        </div>
+        <div className="kpiValue">10</div>
+        <div className="kpiChange">Design preview</div>
+      </div>
+    </section>
+
+    <section className="card tableCard">
+      <div className="tableHeader">
+        <div>
+          <div className="cardTitle">Lead Pipeline</div>
+          <div className="cardMeta">
+            Design preview only - sample records, not live data
+          </div>
+        </div>
+        <div className="cardMeta">Recent leads</div>
+      </div>
+
+      <div className="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Lead ID</th>
+              <th>Company</th>
+              <th>Contact</th>
+              <th>Source</th>
+              <th>Created</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                id: "LD-26016",
+                company: "Northstar Retail",
+                contact: "Amina Rahman",
+                email: "amina@example.com",
+                source: "Website",
+                created: "10 Oct 2026",
+                status: "New",
+              },
+              {
+                id: "LD-26015",
+                company: "Eastern Gate Trading",
+                contact: "Omar Hassan",
+                email: "omar@example.com",
+                source: "Referral",
+                created: "09 Oct 2026",
+                status: "Contacted",
+              },
+              {
+                id: "LD-26014",
+                company: "BlueLine Medical",
+                contact: "Sara Khalid",
+                email: "sara@example.com",
+                source: "LinkedIn",
+                created: "08 Oct 2026",
+                status: "Qualified",
+              },
+              {
+                id: "LD-26013",
+                company: "Summit Industrial",
+                contact: "Faisal Nasser",
+                email: "faisal@example.com",
+                source: "Campaign",
+                created: "07 Oct 2026",
+                status: "Nurture",
+              },
+              {
+                id: "LD-26012",
+                company: "Cedar Home Supply",
+                contact: "Maya Ali",
+                email: "maya@example.com",
+                source: "Website",
+                created: "06 Oct 2026",
+                status: "Disqualified",
+              },
+            ]
+              .filter((lead) =>
+                `${lead.id} ${lead.company} ${lead.contact} ${lead.email} ${lead.source} ${lead.status}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((lead) => {
+                const statusClass =
+                  lead.status === "Qualified"
+                    ? "onTime"
+                    : lead.status === "Disqualified"
+                    ? "delayed"
+                    : "transit";
+
+                return (
+                  <tr key={lead.id}>
+                    <td className="shipmentId">{lead.id}</td>
+                    <td className="customer">{lead.company}</td>
+                    <td>
+                      <div>{lead.contact}</div>
+                      <div className="muted">{lead.email}</div>
+                    </td>
+                    <td className="muted">{lead.source}</td>
+                    <td>{lead.created}</td>
+                    <td>
+                      <span className={`status ${statusClass}`}>
+                        {lead.status}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </>
+)}
+
 {active === "Dashboard" && (
   <>
           <section className="kpis">
