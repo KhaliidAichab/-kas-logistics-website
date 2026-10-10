@@ -29,7 +29,16 @@ export async function POST(request) {
         );
       }
     }
-
+  if (
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+      String(body.email).trim()
+    )
+  ) {
+    return NextResponse.json(
+      { error: "Invalid email address." },
+      { status: 400 }
+    );
+  }
     const supabaseUrl = process.env.SUPABASE_URL;
     const secretKey =
       process.env.SUPABASE_SECRET_KEY;
