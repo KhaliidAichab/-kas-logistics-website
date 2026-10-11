@@ -1606,7 +1606,7 @@ onClick={() => {
           <span className="kpiLabel">NEW</span>
           <span className="kpiIcon">N</span>
         </div>
-        <div className="kpiValue">12</div>
+        <div className="kpiValue">{quoteNewCount}</div>
         <div className="kpiChange">Sample data</div>
       </div>
 
@@ -1615,7 +1615,7 @@ onClick={() => {
           <span className="kpiLabel">UNDER REVIEW</span>
           <span className="kpiIcon">R</span>
         </div>
-        <div className="kpiValue">8</div>
+        <div className="kpiValue">{quoteReviewCount}</div>
         <div className="kpiChange">Sample data</div>
       </div>
 
@@ -1624,7 +1624,7 @@ onClick={() => {
           <span className="kpiLabel">CONVERTED</span>
           <span className="kpiIcon">C</span>
         </div>
-        <div className="kpiValue">9</div>
+        <div className="kpiValue">{quoteConvertedCount}</div>
         <div className="kpiChange">Sample data</div>
       </div>
     </section>
