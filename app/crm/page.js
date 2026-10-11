@@ -1585,7 +1585,7 @@ onClick={() => {
           <span className="kpiLabel">TOTAL REQUESTS</span>
           <span className="kpiIcon">Q</span>
         </div>
-        <div className="kpiValue">36</div>
+        <div className="kpiValue">{liveQuotes.length}</div>
         <div className="kpiChange">Sample data</div>
       </div>
 
