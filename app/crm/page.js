@@ -53,6 +53,9 @@ const menuItems = [
 export default function CRM() {
   const [active, setActive] = useState("Dashboard");
   const [search, setSearch] = useState("");
+  const [liveQuotes, setLiveQuotes] = useState([]);
+const [quotesLoading, setQuotesLoading] = useState(true);
+const [quotesError, setQuotesError] = useState("");
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShipmentForm, setShowShipmentForm] = useState(false);
   const [liveShipments, setLiveShipments] = useState([]);
