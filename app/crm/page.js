@@ -1598,7 +1598,7 @@ onClick={() => {
           <span className="kpiIcon">Q</span>
         </div>
         <div className="kpiValue">{liveQuotes.length}</div>
-        <div className="kpiChange">Sample data</div>
+        <div className="kpiChange">Live data</div>
       </div>
 
       <div className="kpi">
@@ -1607,7 +1607,7 @@ onClick={() => {
           <span className="kpiIcon">N</span>
         </div>
         <div className="kpiValue">{quoteNewCount}</div>
-        <div className="kpiChange">Sample data</div>
+        <div className="kpiChange">Live data</div>
       </div>
 
       <div className="kpi">
@@ -1616,7 +1616,7 @@ onClick={() => {
           <span className="kpiIcon">R</span>
         </div>
         <div className="kpiValue">{quoteReviewCount}</div>
-        <div className="kpiChange">Sample data</div>
+        <div className="kpiChange">Live data</div>
       </div>
 
       <div className="kpi">
@@ -1625,7 +1625,7 @@ onClick={() => {
           <span className="kpiIcon">C</span>
         </div>
         <div className="kpiValue">{quoteConvertedCount}</div>
-        <div className="kpiChange">Sample data</div>
+        <div className="kpiChange">Live data</div>
       </div>
     </section>
 
