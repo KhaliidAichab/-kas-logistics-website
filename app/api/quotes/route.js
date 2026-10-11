@@ -2,8 +2,8 @@
 import { NextResponse } from "next/server";
 export async function GET() {
 try {
-const supabaseUrl = process.env.SUPABASE_URL?.replace(//+$/, “”);
-const secretKey = process.env.SUPABASE_SECRET_KEY;
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const secretKey = process.env.SUPABASE_SECRET_KEY;
 
 if (!supabaseUrl || !secretKey) {
   return NextResponse.json(
