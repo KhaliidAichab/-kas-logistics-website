@@ -1656,52 +1656,8 @@ onClick={() => {
 
           <tbody>
             {liveQuotes
-              {
-                id: "QT-26041",
-                company: "Al Noor Trading",
-                origin: "Riyadh, SA",
-                destination: "Dubai, UAE",
-                service: "Air Freight",
-                submitted: "10 Oct 2026",
-                status: "New",
-              },
-              {
-                id: "QT-26040",
-                company: "Gulf Industries",
-                origin: "Dammam, SA",
-                destination: "Jeddah, SA",
-                service: "Land Freight",
-                submitted: "09 Oct 2026",
-                status: "Under Review",
-              },
-              {
-                id: "QT-26039",
-                company: "BlueWave Retail",
-                origin: "Shanghai, CN",
-                destination: "Jeddah, SA",
-                service: "Sea Freight",
-                submitted: "08 Oct 2026",
-                status: "Quoted",
-              },
-              {
-                id: "QT-26038",
-                company: "MedCare Supply",
-                origin: "Dubai, UAE",
-                destination: "Riyadh, SA",
-                service: "Air Freight",
-                submitted: "07 Oct 2026",
-                status: "Converted",
-              },
-              {
-                id: "QT-26037",
-                company: "Riyadh Manufacturing",
-                origin: "Riyadh, SA",
-                destination: "Kuwait City, KW",
-                service: "Land Freight",
-                submitted: "06 Oct 2026",
-                status: "Rejected",
-              },
-            ]
+ 
+                  
               .filter((quote) =>
                 `${quote.id} ${quote.company} ${quote.origin} ${quote.destination} ${quote.service} ${quote.status}`
                   .toLowerCase()
