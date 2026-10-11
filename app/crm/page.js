@@ -171,7 +171,19 @@ setLiveShipments(mappedShipments);
       .toLowerCase()
       .includes(search.toLowerCase())
   );
+const quoteTotal = liveQuotes.length;
 
+const quoteNewCount = liveQuotes.filter(
+  (quote) => String(quote.status || "New").toLowerCase() === "new"
+).length;
+
+const quoteReviewCount = liveQuotes.filter(
+  (quote) => String(quote.status || "").toLowerCase() === "under review"
+).length;
+
+const quoteConvertedCount = liveQuotes.filter(
+  (quote) => String(quote.status || "").toLowerCase() === "converted"
+).length;
   return (
     <main className="crm">
       <style>{`
