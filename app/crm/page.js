@@ -107,6 +107,65 @@ setLiveShipments(mappedShipments);
 
   loadShipments();
 }, []);
+  useEffect(() => {
+  let cancelled = false;
+
+  async function loadQuotes() {
+    try {
+      const response = await fetch("/api/quotes", {
+        cache: "no-store",
+      });
+      const data = await response.json();
+
+      if (
+        !response.ok ||
+        data?.success !== true ||
+        !Array.isArray(data.quotes)
+      ) {
+        throw new Error("Unable to load quotes");
+      }
+
+      const rows = data.quotes.map((quote) => ({
+        ...quote,
+        id: `QT-${String(quote.id).padStart(5, "0")}`,
+        company: quote.company || "—",
+        origin: quote.origin || "—",
+        destination: quote.destination || "—",
+        service: quote.service || "—",
+        submitted: quote.created_at
+          ? new Date(quote.created_at).toLocaleDateString(
+              "en-GB",
+              {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              }
+            )
+          : "—",
+        status: quote.status || "New",
+      }));
+
+      if (!cancelled) {
+        setLiveQuotes(rows);
+      }
+    } catch {
+      if (!cancelled) {
+        setLiveQuotes([]);
+        setQuotesError("Unable to load live quote requests.");
+      }
+    } finally {
+      if (!cancelled) {
+        setQuotesLoading(false);
+      }
+    }
+  }
+
+  loadQuotes();
+
+  return () => {
+    cancelled = true;
+  };
+}, []);
   const filteredShipments = liveShipments.filter((item) =>
     `${item.id} ${item.customer} ${item.route}`
       .toLowerCase()
