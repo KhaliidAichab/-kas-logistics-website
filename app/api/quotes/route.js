@@ -35,9 +35,9 @@ if (!response.ok) {
 return NextResponse.json({ success: true, quotes: data });
 
 } catch (error) {
-console.error(“Quote GET failed:”, error);
+    console.error("Quote GET failed:", error);
 return NextResponse.json(
-{ error: “Unable to load quotes” },
+      { error: "Unable to load quotes" },
 { status: 500 }
 );
 }
