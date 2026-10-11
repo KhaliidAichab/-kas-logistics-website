@@ -1,6 +1,47 @@
 
 import { NextResponse } from "next/server";
+export async function GET() {
+try {
+const supabaseUrl = process.env.SUPABASE_URL?.replace(//+$/, “”);
+const secretKey = process.env.SUPABASE_SECRET_KEY;
 
+if (!supabaseUrl || !secretKey) {
+  return NextResponse.json(
+    { error: "Server configuration error" },
+    { status: 500 }
+  );
+}
+const response = await fetch(
+  `${supabaseUrl}/rest/v1/quotes?select=id,company,origin,destination,service,status,created_at&order=created_at.desc&limit=100`,
+  {
+    method: "GET",
+    headers: {
+      apikey: secretKey,
+      ...(secretKey.startsWith("sb_secret_")
+        ? {}
+        : { Authorization: `Bearer ${secretKey}` }),
+    },
+    cache: "no-store",
+  }
+);
+const data = await response.json();
+if (!response.ok) {
+  console.error("Supabase quote fetch failed:", data);
+  return NextResponse.json(
+    { error: "Unable to load quotes" },
+    { status: 500 }
+  );
+}
+return NextResponse.json({ success: true, quotes: data });
+
+} catch (error) {
+console.error(“Quote GET failed:”, error);
+return NextResponse.json(
+{ error: “Unable to load quotes” },
+{ status: 500 }
+);
+}
+}
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
