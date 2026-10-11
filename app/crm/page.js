@@ -1655,7 +1655,7 @@ onClick={() => {
           </thead>
 
           <tbody>
-            {[
+            {liveQuotes
               {
                 id: "QT-26041",
                 company: "Al Noor Trading",
