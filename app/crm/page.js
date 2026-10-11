@@ -1634,7 +1634,7 @@ onClick={() => {
         <div>
           <div className="cardTitle">Quote Requests</div>
           <div className="cardMeta">
-            Design preview only - sample records, not live customer data
+            Live customer quote requests
           </div>
         </div>
         <div className="cardMeta">Latest requests</div>
