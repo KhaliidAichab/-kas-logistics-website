@@ -814,7 +814,10 @@ z-index: 100;
     
               <button
   className="actionBtn"
-  onClick={() => setActive("Quotes")}
+  onClick={() => {
+  setActive("Quotes");
+  setShowQuoteForm(true);
+}}
 >
   + New Quote
 </button>
