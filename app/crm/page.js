@@ -58,6 +58,7 @@ const [quotesLoading, setQuotesLoading] = useState(true);
 const [quotesError, setQuotesError] = useState("");
 const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showShipmentForm, setShowShipmentForm] = useState(false);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [liveShipments, setLiveShipments] = useState([]);
 const [showAllShipments, setShowAllShipments] = useState(false);
 useEffect(() => {
