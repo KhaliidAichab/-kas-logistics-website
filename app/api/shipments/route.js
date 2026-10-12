@@ -9,7 +9,7 @@ export async function GET() {
         method: "GET",
         headers: {
           apikey: process.env.SUPABASE_SECRET_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SECRET_KEY}`,
+          
         },
         cache: "no-store",
       }
@@ -75,7 +75,7 @@ export async function POST(request) {
         headers: {
           "Content-Type": "application/json",
           apikey: process.env.SUPABASE_SECRET_KEY,
-          Authorization: `Bearer ${process.env.SUPABASE_SECRET_KEY}`,
+          
           Prefer: "return=representation",
         },
         body: JSON.stringify({
