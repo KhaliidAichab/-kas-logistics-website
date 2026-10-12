@@ -1632,7 +1632,138 @@ onClick={() => {
         <div className="kpiChange">Live data</div>
       </div>
     </section>
+{showQuoteForm && (
+  <section
+    className="card"
+    style={{ marginBottom: "18px", padding: "24px" }}
+  >
+    <div className="cardTitle">Create New Quote</div>
+    <p className="cardMeta">
+      Enter the customer and shipment details.
+    </p>
 
+    <form
+      onSubmit={async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.currentTarget);
+
+        const payload = {
+          company: String(formData.get("company") || "").trim(),
+          name: String(formData.get("name") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          phone: String(formData.get("phone") || "").trim(),
+          origin: String(formData.get("origin") || "").trim(),
+          destination: String(formData.get("destination") || "").trim(),
+          service: String(formData.get("service") || "Air Freight"),
+          cargoType: String(formData.get("cargoType") || "General Cargo"),
+        };
+
+        try {
+          const response = await fetch("/api/quotes", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json().catch(() => ({}));
+
+          if (!response.ok || result.success !== true) {
+            throw new Error(
+              result.error || "Unable to save the quote."
+            );
+          }
+
+          alert("Quote saved successfully.");
+          setShowQuoteForm(false);
+          window.location.reload();
+        } catch (error) {
+          alert(error.message || "Unable to save the quote.");
+        }
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+          gap: "14px",
+          marginTop: "18px",
+        }}
+      >
+        <label>
+          Company
+          <input name="company" required />
+        </label>
+
+        <label>
+          Contact Name
+          <input name="name" required />
+        </label>
+
+        <label>
+          Email
+          <input name="email" type="email" required />
+        </label>
+
+        <label>
+          Phone
+          <input name="phone" type="tel" required />
+        </label>
+
+        <label>
+          Origin
+          <input name="origin" required />
+        </label>
+
+        <label>
+          Destination
+          <input name="destination" required />
+        </label>
+
+        <label>
+          Service
+          <select name="service" defaultValue="Air Freight">
+            <option value="Air Freight">Air Freight</option>
+            <option value="Sea Freight">Sea Freight</option>
+            <option value="Land Freight">Land Freight</option>
+          </select>
+        </label>
+
+        <label>
+          Cargo Type
+          <input
+            name="cargoType"
+            defaultValue="General Cargo"
+            required
+          />
+        </label>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          gap: "12px",
+          marginTop: "20px",
+          flexWrap: "wrap",
+        }}
+      >
+        <button type="submit" className="actionBtn">
+          Save Quote
+        </button>
+
+        <button
+          type="button"
+          className="actionBtn"
+          onClick={() => setShowQuoteForm(false)}
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </section>
+)}
     <section className="card tableCard">
       <div className="tableHeader">
         <div>
