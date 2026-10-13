@@ -877,7 +877,7 @@ z-index: 100;
           <span className="kpiLabel">ACTIVE CUSTOMERS</span>
           <span className="kpiIcon">A</span>
         </div>
-        <div className="kpiValue">{customers.filter((customer) => customer.status === "Active").length}</div>
+<div className="kpiValue">{customers.filter((customer) => customer.status === "Active").length}</div>
         <div className="kpiChange">{customers.length
   ? (
       customers.filter(
