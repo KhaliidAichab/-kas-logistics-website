@@ -923,43 +923,7 @@ z-index: 100;
           </thead>
 
           <tbody>
-            {[
-              {
-                company: "ABC Trading",
-                contact: "Ahmed Alharbi",
-                shipments: 18,
-                revenue: "SAR 420K",
-                status: "Active",
-              },
-              {
-                company: "Gulf Industries",
-                contact: "Mohammed Alotaibi",
-                shipments: 24,
-                revenue: "SAR 680K",
-                status: "Active",
-              },
-              {
-                company: "Nile Retail",
-                contact: "Omar Hassan",
-                shipments: 12,
-                revenue: "SAR 295K",
-                status: "Active",
-              },
-              {
-                company: "MedCare Pharma",
-                contact: "Sara Khalid",
-                shipments: 16,
-                revenue: "SAR 510K",
-                status: "Active",
-              },
-              {
-                company: "Riyadh Manufacturing",
-                contact: "Faisal Ahmed",
-                shipments: 9,
-                revenue: "SAR 185K",
-                status: "Review",
-              },
-            ]
+  {customers
               .filter((customer) =>
                 `${customer.company} ${customer.contact}`
                   .toLowerCase()
