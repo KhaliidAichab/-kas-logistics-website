@@ -17,7 +17,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
-
+const [isLoading, setIsLoading] = useState(false);
   function handleSubmit(event) {
     event.preventDefault();
 
