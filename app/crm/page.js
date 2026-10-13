@@ -74,7 +74,7 @@ useEffect(() => {
         const seenShipmentIds = new Set();
 
 const deduplicatedShipments = [...result.shipments]
-  .sort((a, b) => Number(a.id) - Number(b.id))
+  .sort((a, b) => Number(b.id) - Number(a.id))
   .filter((item) => {
     const key = String(
       item.shipment_id || item.id || ""
