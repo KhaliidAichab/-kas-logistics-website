@@ -1504,6 +1504,14 @@ price_sar:
         type="date"
       />
 
+<input
+  type="number"
+  min="0"
+  step="0.01"
+  className="search"
+  placeholder="Price (SAR)"
+/>
+
       <input
         className="search"
         placeholder="ETA"
