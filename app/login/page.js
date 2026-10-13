@@ -18,26 +18,44 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [message, setMessage] = useState("");
 const [isLoading, setIsLoading] = useState(false);
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const cleanEmail = email.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailPattern.test(cleanEmail)) {
-      setMessage("Please enter a valid email address.");
-      return;
-    }
-
-    if (!password) {
-      setMessage("Please enter your password.");
-      return;
-    }
-
-    setMessage(
-      "Authentication is not configured yet. Your credentials have not been sent or saved."
-    );
+  async function handleSubmit(event) {
+  event.preventDefault();
+  const cleanEmail = email.trim();
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(cleanEmail)) {
+    setMessage("Please enter a valid email address.");
+    return;
   }
+  if (!password) {
+    setMessage("Please enter your password.");
+    return;
+  }
+  if (!supabase) {
+    setMessage("Supabase configuration is missing.");
+    return;
+  }
+  setIsLoading(true);
+  setMessage("");
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: cleanEmail,
+      password,
+    });
+    if (error) {
+      setMessage(
+        error.message === "Invalid login credentials"
+          ? "Incorrect email or password."
+          : error.message
+      );
+      return;
+    }
+    window.location.assign("/crm");
+  } catch {
+    setMessage("Unable to connect. Please try again.");
+  } finally {
+    setIsLoading(false);
+  }
+}
 
   const styles = {
     page: {
