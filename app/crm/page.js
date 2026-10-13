@@ -1405,6 +1405,12 @@ z-index: 100;
     quantity: form.querySelector('input[placeholder="Quantity"]')?.value || "",
     pickup_date: form.querySelector('input[type="date"]')?.value || null,
     eta: form.querySelector('input[placeholder="ETA"]')?.value || "",
+    
+price_sar:
+  form.querySelector('input[placeholder="Price (SAR)"]')?.value === ""
+    ? null
+    : Number(form.querySelector('input[placeholder="Price (SAR)"]')?.value),
+
     special_requirements:
       form.querySelector('input[placeholder="Special Requirements"]')?.value || "",
   };
