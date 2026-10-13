@@ -868,7 +868,7 @@ z-index: 100;
           <span className="kpiLabel">TOTAL CUSTOMERS</span>
           <span className="kpiIcon">C</span>
         </div>
-        <div className="kpiValue">48</div>
+        <div className="kpiValue">{customers.length}</div>
         <div className="kpiChange">+6 this month</div>
       </div>
 
