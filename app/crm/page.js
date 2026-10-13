@@ -878,7 +878,13 @@ z-index: 100;
           <span className="kpiIcon">A</span>
         </div>
         <div className="kpiValue">{customers.filter((customer) => customer.status === "Active").length}</div>
-        <div className="kpiChange">87.5% of total</div>
+        <div className="kpiChange">{customers.length
+  ? (
+      customers.filter(
+        (customer) => customer.status === "Active"
+      ).length / customers.length * 100
+    ).toFixed(1) + "% of total"
+  : "0% of total"} of total</div>
       </div>
 
       <div className="kpi">
