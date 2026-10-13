@@ -224,7 +224,7 @@ const [isLoading, setIsLoading] = useState(false);
           </div>
 
           <button type="submit" style={styles.button}>
-            Sign in
+            {isLoading ? "Signing in..." : "Sign in"}
           </button>
 
           {message && (
