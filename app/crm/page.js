@@ -883,7 +883,7 @@ z-index: 100;
       customers.filter(
         (customer) => customer.status === "Active"
       ).length / customers.length * 100
-    ).toFixed(1) + "% of total"
+    ).toFixed(1) + "%"
   : "0% of total"} of total</div>
       </div>
 
