@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+);
 
 const shipments = [
   {
@@ -61,7 +67,36 @@ const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showQuoteForm, setShowQuoteForm] = useState(false);
   const [liveShipments, setLiveShipments] = useState([]);
 const [showAllShipments, setShowAllShipments] = useState(false);
+
+const [customers, setCustomers] = useState([]);
+
 useEffect(() => {
+  async function loadCustomers() {
+    const { data, error } = await supabase
+      .from("customers")
+      .select("company_name, contact_name, status")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Customers loading error:", error.message);
+      return;
+    }
+
+    setCustomers(
+      (data || []).map((item) => ({
+        company: item.company_name,
+        contact: item.contact_name,
+        shipments: 0,
+        revenue: "—",
+        status: item.status || "Active",
+      }))
+    );
+  }
+
+  loadCustomers();
+}, []);
+
+  useEffect(() => {
   async function loadShipments() {
     try {
       const response = await fetch("/api/shipments", {
