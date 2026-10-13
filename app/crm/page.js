@@ -892,7 +892,20 @@ z-index: 100;
           <span className="kpiLabel">ACTIVE SHIPMENTS</span>
           <span className="kpiIcon">S</span>
         </div>
-        <div className="kpiValue">128</div>
+        <div className="kpiValue">
+  {liveShipments.filter((shipment) => {
+    const status = String(shipment.status || "")
+      .trim()
+      .toLowerCase();
+
+    return ![
+      "delivered",
+      "completed",
+      "cancelled",
+      "canceled",
+    ].includes(status);
+  }).length}
+</div>
         <div className="kpiChange">Across all customers</div>
       </div>
 
