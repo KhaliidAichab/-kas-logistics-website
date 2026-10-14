@@ -105,6 +105,12 @@ export async function POST(request) {
       }
     );
     const data = await response.json();
+    console.log(
+  "[shipments POST] Supabase returned price_sar:",
+  data?.[0]?.price_sar,
+  "HTTP:",
+  response.status
+);
     if (!response.ok) {
       if (data?.code === "23505") {
         return NextResponse.json(
