@@ -1922,7 +1922,7 @@ onClick={() => {
         <div>
           <div className="cardTitle">Shipment Control Tower</div>
           <div className="cardMeta">
-            Design preview only - sample records, not live data
+            Shipment records loaded from CRM
           </div>
         </div>
         <span className="muted">Operational overview</span>
