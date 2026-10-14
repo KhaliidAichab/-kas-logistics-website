@@ -90,10 +90,16 @@ export async function POST(request) {
           pickup_date: body.pickup_date || null,
           eta: body.eta || null,
           special_requirements: body.special_requirements || null,
-          price_sar:
-  body.price_sar === "" || body.price_sar == null
+      price_sar: (() => {
+  console.log(
+    "[shipments POST] body.price_sar:",
+    body.price_sar,
+    typeof body.price_sar
+  );
+  return body.price_sar === "" || body.price_sar == null
     ? null
-    : Number(body.price_sar),
+    : Number(body.price_sar);
+})(),
           status: "Created",
         }),
       }
