@@ -1604,7 +1604,9 @@ onClick={() => {
                       <td className="customer">{shipment.customer}</td>
                       <td className="muted">{shipment.route}</
                        
-<td>{shipment.price_sar == null || shipment.price_sar === "" ? "—" : "SAR " + Number(shipment.price_sar).toLocaleString("en-SA")}</td>
+
+<td>{shipment.price_sar == null ? "—" : "SAR " + shipment.price_sar}</td>
+
                                
                       <td>{shipment.mode}</td>
                       <td>{shipment.eta}</td>
