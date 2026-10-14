@@ -131,6 +131,7 @@ const mappedShipments = deduplicatedShipments.map((item) => ({
   mode: item.service || item.mode || "Air",
   eta: item.eta || "-",
   status: item.status || "Created",
+  price_sar: item.price_sar ?? null,
 }));
 
 setLiveShipments(mappedShipments);
