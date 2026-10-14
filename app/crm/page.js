@@ -1934,40 +1934,7 @@ onClick={() => {
             </tr>
           </thead>
           <tbody>
-            {[
-              {
-                id: "KAS-26081",
-                customer: "Northstar Retail",
-                route: "Riyadh - Dubai",
-                mode: "Air",
-                eta: "10 Oct 2026, 18:40",
-                status: "On Time",
-              },
-              {
-                id: "KAS-26082",
-                customer: "Eastern Gate Trading",
-                route: "Shanghai - Jeddah",
-                mode: "Sea",
-                eta: "14 Oct 2026",
-                status: "In Transit",
-              },
-              {
-                id: "KAS-26083",
-                customer: "BlueLine Medical",
-                route: "Riyadh - Dammam",
-                mode: "Land",
-                eta: "10 Oct 2026, 15:20",
-                status: "Delayed",
-              },
-              {
-                id: "KAS-26084",
-                customer: "Summit Industrial",
-                route: "Dubai - Riyadh",
-                mode: "Air",
-                eta: "11 Oct 2026",
-                status: "In Transit",
-              },
-            ]
+  {liveShipments
               .filter((shipment) =>
                 `${shipment.id} ${shipment.customer} ${shipment.route} ${shipment.mode} ${shipment.status}`
                   .toLowerCase()
