@@ -1602,7 +1602,9 @@ onClick={() => {
                     <tr key={`${shipment.id}-${shipment.customer}`}>
                       <td className="shipmentId">{shipment.id}</td>
                       <td className="customer">{shipment.customer}</td>
-                      <td className="muted">{shipment.route}</
+                      
+<td className="muted">{shipment.route}</td>
+
                        
 
 <td>{shipment.price_sar == null ? "—" : "SAR " + shipment.price_sar}</td>
