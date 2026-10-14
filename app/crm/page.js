@@ -1590,6 +1590,7 @@ onClick={() => {
                     <th>Shipment</th>
                     <th>Customer</th>
                     <th>Route</th>
+    <th>Price (SAR)</th>
                     <th>Mode</th>
                     <th>ETA</th>
                     <th>Status</th>
@@ -1602,6 +1603,7 @@ onClick={() => {
                       <td className="shipmentId">{shipment.id}</td>
                       <td className="customer">{shipment.customer}</td>
                       <td className="muted">{shipment.route}</td>
+                                                                               
                       <td>{shipment.mode}</td>
                       <td>{shipment.eta}</td>
                       <td>
