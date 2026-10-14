@@ -1602,8 +1602,13 @@ onClick={() => {
                     <tr key={`${shipment.id}-${shipment.customer}`}>
                       <td className="shipmentId">{shipment.id}</td>
                       <td className="customer">{shipment.customer}</td>
-                      <td className="muted">{shipment.route}</td>
-                                                                               
+                      <td className="muted">{shipment.route}</
+<td>
+  {shipment.price_sar != null
+    ? `SAR ${Number(shipment.price_sar).toLocaleString("en-SA")}`
+    : "—"}
+</td>
+                                                      
                       <td>{shipment.mode}</td>
                       <td>{shipment.eta}</td>
                       <td>
