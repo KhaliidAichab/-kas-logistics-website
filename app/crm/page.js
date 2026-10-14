@@ -1878,7 +1878,7 @@ onClick={() => {
           <span className="kpiLabel">ACTIVE SHIPMENTS</span>
           <span className="kpiIcon">A</span>
         </div>
-        <div className="kpiValue">128</div>
+        <div className="kpiValue">{liveShipments.filter((s) => !["delivered", "cancelled", "canceled"].includes(String(s.status || "").trim().toLowerCase())).length}</div>
         <div className="kpiChange">Design preview</div>
       </div>
 
@@ -1887,7 +1887,7 @@ onClick={() => {
           <span className="kpiLabel">IN TRANSIT</span>
           <span className="kpiIcon">T</span>
         </div>
-        <div className="kpiValue">86</div>
+        <div className="kpiValue">{liveShipments.filter((s) => ["in transit", "transit"].includes(String(s.status || "").trim().toLowerCase())).length}</div>
         <div className="kpiChange">Design preview</div>
       </div>
 
@@ -1896,7 +1896,14 @@ onClick={() => {
           <span className="kpiLabel">DELAYED</span>
           <span className="kpiIcon">!</span>
         </div>
-        <div className="kpiValue">12</div>
+        <div className="kpiValue">{liveShipments.filter((s) => {
+  const status = String(s.status || "").trim().toLowerCase();
+  const etaText = String(s.eta || "").trim();
+  const eta = etaText && etaText !== "—" && !/tomorrow|today|yesterday/i.test(etaText) ? new Date(etaText) : null;
+  const isOverdue = eta && !Number.isNaN(eta.getTime()) && eta < new Date();
+  return /delayed|delay|at risk|overdue|exception/.test(status) ||
+    (isOverdue && !["delivered", "cancelled", "canceled"].includes(status));
+}).length}</div>
         <div className="kpiChange">Requires attention</div>
       </div>
 
@@ -1905,7 +1912,7 @@ onClick={() => {
           <span className="kpiLabel">DELIVERED</span>
           <span className="kpiIcon">D</span>
         </div>
-        <div className="kpiValue">30</div>
+        <div className="kpiValue">{liveShipments.filter((s) => String(s.status || "").trim().toLowerCase() === "delivered").length}</div>
         <div className="kpiChange">Design preview</div>
       </div>
     </section>
