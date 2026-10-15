@@ -1973,6 +1973,82 @@ onClick={() => {
         </table>
       </div>
     </section>
+            
+<section className="card tableCard">
+  <div className="tableHeader">
+    <div>
+      <div className="cardTitle">Operational Exceptions</div>
+      <div className="cardMeta">
+        Shipments requiring operational follow-up
+      </div>
+    </div>
+    <span className="muted">
+      {liveShipments.filter((shipment) =>
+        /delayed|delay|at risk|overdue|exception|on hold|failed|customs hold|clearance issue/i.test(
+          String(shipment.status || "")
+        )
+      ).length} exceptions
+    </span>
+  </div>
+
+  <div className="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Shipment ID</th>
+          <th>Customer</th>
+          <th>Route</th>
+          <th>Status</th>
+          <th>ETA</th>
+          <th>Recommended Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {liveShipments.filter((shipment) =>
+          /delayed|delay|at risk|overdue|exception|on hold|failed|customs hold|clearance issue/i.test(
+            String(shipment.status || "")
+          )
+        ).length === 0 ? (
+          <tr>
+            <td colSpan={6}>
+              No shipments are currently flagged for operational attention.
+            </td>
+          </tr>
+        ) : (
+          liveShipments
+            .filter((shipment) =>
+              /delayed|delay|at risk|overdue|exception|on hold|failed|customs hold|clearance issue/i.test(
+                String(shipment.status || "")
+              )
+            )
+            .map((shipment, index) => {
+              const status = String(shipment.status || "").toLowerCase();
+
+              const action = /customs|clearance/.test(status)
+                ? "Verify customs clearance"
+                : /delay|overdue|late/.test(status)
+                  ? "Contact carrier and confirm revised ETA"
+                  : /hold/.test(status)
+                    ? "Review hold reason and assign follow-up"
+                    : "Review shipment and assign follow-up";
+
+              return (
+                <tr key={`exception-${shipment.id || "shipment"}-${index}`}>
+                  <td className="shipmentId">{shipment.id || "—"}</td>
+                  <td className="customer">{shipment.customer || "—"}</td>
+                  <td className="muted">{shipment.route || "—"}</td>
+                  <td>{shipment.status || "—"}</td>
+                  <td>{shipment.eta || "—"}</td>
+                  <td>{action}</td>
+                </tr>
+              );
+            })
+        )}
+      </tbody>
+    </table>
+  </div>
+</section>
+
   </>
 )}
 
