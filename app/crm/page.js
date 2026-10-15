@@ -2470,8 +2470,14 @@ onClick={() => {
           <span className="kpiLabel">OPEN EXCEPTIONS</span>
           <span className="kpiIcon">!</span>
         </div>
-        <div className="kpiValue">12</div>
-        <div className="kpiChange">Sample data - review required</div>
+        <div className="kpiValue">
+  {liveShipments.filter((shipment) =>
+    /delayed|exception|customs|hold|at risk/i.test(
+      String(shipment.status || "")
+    )
+  ).length}
+</div>
+        <div className="kpiChange">Calculated from CRM shipment statuses</div>
       </div>
     </section>
 
