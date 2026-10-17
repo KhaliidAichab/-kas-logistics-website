@@ -2058,13 +2058,9 @@ onClick={() => {
             </td>
           </tr>
         ) : (
-          liveShipments
-            .filter((shipment) =>
-              /delayed|delay|at risk|overdue|exception|on hold|failed|customs hold|clearance issue/i.test(
-                String(shipment.status || "")
-              )
-            )
-            .map((shipment, index) => {
+liveShipments
+  .filter(isOperationalException)
+  .map((shipment, index) => {
               const status = String(shipment.status || "").toLowerCase();
 
               const action = /customs|clearance/.test(status)
