@@ -2188,7 +2188,9 @@ const action = /customs|clearance/.test(status)
           <span className="kpiLabel">TOTAL DOCUMENTS</span>
           <span className="kpiIcon">D</span>
         </div>
-        <div className="kpiValue">286</div>
+        <div className="kpiValue">
+  {documentsLoading ? "…" : liveDocuments.length}
+</div>
         <div className="kpiChange">Design preview</div>
       </div>
 
