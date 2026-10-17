@@ -2199,7 +2199,15 @@ const action = /customs|clearance/.test(status)
           <span className="kpiLabel">APPROVED</span>
           <span className="kpiIcon">A</span>
         </div>
-        <div className="kpiValue">214</div>
+        <div className="kpiValue"><div className="kpiValue">
+  {documentsLoading
+    ? "…"
+    : liveDocuments.filter((doc) =>
+        ["pending", "pending review", "under review"].includes(
+          String(doc.status || "").trim().toLowerCase()
+        )
+      ).length}
+</div></div>
         <div className="kpiChange">Design preview</div>
       </div>
 
@@ -2208,7 +2216,15 @@ const action = /customs|clearance/.test(status)
           <span className="kpiLabel">PENDING REVIEW</span>
           <span className="kpiIcon">P</span>
         </div>
-        <div className="kpiValue">18</div>
+        <div className="kpiValue"><div className="kpiValue">
+  {documentsLoading
+    ? "…"
+    : liveDocuments.filter((doc) =>
+        ["pending", "pending review", "under review"].includes(
+          String(doc.status || "").trim().toLowerCase()
+        )
+      ).length}
+</div></div>
         <div className="kpiChange">Awaiting review</div>
       </div>
 
@@ -2217,7 +2233,25 @@ const action = /customs|clearance/.test(status)
           <span className="kpiLabel">EXPIRING SOON</span>
           <span className="kpiIcon">!</span>
         </div>
-        <div className="kpiValue">7</div>
+        <div className="kpiValue"><div className="kpiValue">
+  {documentsLoading
+    ? "…"
+    : liveDocuments.filter((doc) => {
+        if (!doc.expiry_date) return false;
+
+        const expiry = new Date(`${doc.expiry_date}T00:00:00`);
+        if (Number.isNaN(expiry.getTime())) return false;
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const daysLeft = Math.ceil(
+          (expiry.getTime() - today.getTime()) / 86400000
+        );
+
+        return daysLeft >= 0 && daysLeft <= 30;
+      }).length}
+</div></div>
         <div className="kpiChange">Requires attention</div>
       </div>
     </section>
