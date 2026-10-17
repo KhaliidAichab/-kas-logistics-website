@@ -254,6 +254,70 @@ setLiveShipments(mappedShipments);
     cancelled = true;
   };
 }, []);
+  
+useEffect(() => {
+  let cancelled = false;
+
+  async function loadDocuments() {
+    try {
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (sessionError) throw sessionError;
+
+      if (!session?.access_token) {
+        throw new Error("Authentication required.");
+      }
+
+      const response = await fetch("/api/documents", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+        cache: "no-store",
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (
+        !response.ok ||
+        result?.success !== true ||
+        !Array.isArray(result.documents)
+      ) {
+        throw new Error(
+          result?.error || "Unable to load documents."
+        );
+      }
+
+      if (!cancelled) {
+        setLiveDocuments(result.documents);
+        setDocumentsError("");
+      }
+    } catch (error) {
+      console.error("Failed to load documents:", error);
+
+      if (!cancelled) {
+        setLiveDocuments([]);
+        setDocumentsError(
+          "Unable to load documents from the database."
+        );
+      }
+    } finally {
+      if (!cancelled) {
+        setDocumentsLoading(false);
+      }
+    }
+  }
+
+  loadDocuments();
+
+  return () => {
+    cancelled = true;
+  };
+}, []);
+
   const filteredShipments = liveShipments.filter((item) =>
     `${item.id} ${item.customer} ${item.route}`
       .toLowerCase()
