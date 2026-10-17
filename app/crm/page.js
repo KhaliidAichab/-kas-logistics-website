@@ -2057,13 +2057,40 @@ liveShipments
   .map((shipment, index) => {
               const status = String(shipment.status || "").toLowerCase();
 
-              const action = /customs|clearance/.test(status)
-                ? "Verify customs clearance"
-                : /delay|overdue|late/.test(status)
-                  ? "Contact carrier and confirm revised ETA"
-                  : /hold/.test(status)
-                    ? "Review hold reason and assign follow-up"
-                    : "Review shipment and assign follow-up";
+     const etaText = String(shipment.eta || "").trim();
+
+const etaDate =
+  etaText &&
+  etaText !== "—" &&
+  !/\b(today|tomorrow|yesterday)\b/i.test(etaText) &&
+  /\b20\d{2}\b/.test(etaText)
+    ? new Date(etaText)
+    : null;
+
+const hasValidEta =
+  etaDate && !Number.isNaN(etaDate.getTime());
+
+const etaDay = hasValidEta ? new Date(etaDate) : null;
+
+if (etaDay) {
+  etaDay.setHours(0, 0, 0, 0);
+}
+
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+const isPastEta =
+  Boolean(etaDay) &&
+  etaDay < today &&
+  !/delivered|cancelled|canceled/.test(status);
+
+const action = /customs|clearance/.test(status)
+  ? "Verify customs clearance"
+  : /delay|overdue|late/.test(status) || isPastEta
+    ? "Confirm shipment status and revised ETA"
+    : /hold/.test(status)
+      ? "Review hold reason and assign follow-up"
+      : "Review shipment and assign follow-up";
 
               return (
                 <tr key={`exception-${shipment.id || "shipment"}-${index}`}>
