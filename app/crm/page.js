@@ -2029,13 +2029,7 @@ onClick={() => {
         Shipments requiring operational follow-up
       </div>
     </div>
-    <span className="muted">
-      {liveShipments.filter((shipment) =>
-        /delayed|delay|at risk|overdue|exception|on hold|failed|customs hold|clearance issue/i.test(
-          String(shipment.status || "")
-        )
-      ).length} exceptions
-    </span>
+    {liveShipments.filter(isOperationalException).length} exceptions
   </div>
 
   <div className="tableWrap">
