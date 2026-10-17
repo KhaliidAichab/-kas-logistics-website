@@ -117,6 +117,10 @@ const [showAllShipments, setShowAllShipments] = useState(false);
 
 const [customers, setCustomers] = useState([]);
 
+const [liveDocuments, setLiveDocuments] = useState([]);
+const [documentsLoading, setDocumentsLoading] = useState(true);
+const [documentsError, setDocumentsError] = useState("");
+
 useEffect(() => {
   async function loadCustomers() {
     const { data, error } = await supabase
