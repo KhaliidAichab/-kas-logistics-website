@@ -2051,11 +2051,7 @@ onClick={() => {
         </tr>
       </thead>
       <tbody>
-        {liveShipments.filter((shipment) =>
-          /delayed|delay|at risk|overdue|exception|on hold|failed|customs hold|clearance issue/i.test(
-            String(shipment.status || "")
-          )
-        ).length === 0 ? (
+{liveShipments.filter(isOperationalException).length === 0 ? (
           <tr>
             <td colSpan={6}>
               No shipments are currently flagged for operational attention.
