@@ -7,7 +7,54 @@ const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 );
+function isOperationalException(shipment) {
+  const status = String(shipment?.status || "")
+    .trim()
+    .toLowerCase();
 
+  if (/delivered|cancelled|canceled/.test(status)) {
+    return false;
+  }
+
+  if (
+    /delayed|delay|at risk|overdue|exception|customs|clearance|hold|failed/.test(
+      status
+    )
+  ) {
+    return true;
+  }
+
+  const etaText = String(shipment?.eta || "").trim();
+
+  if (
+    !etaText ||
+    etaText === "—" ||
+    /\b(today|tomorrow|yesterday)\b/i.test(etaText) ||
+    !/\b20\d{2}\b/.test(etaText)
+  ) {
+    return false;
+  }
+
+  const etaDate = new Date(etaText);
+
+  if (Number.isNaN(etaDate.getTime())) {
+    return false;
+  }
+
+  const hasTime = /(?:T|\s)\d{1,2}:\d{2}/i.test(etaText);
+
+  if (hasTime) {
+    return etaDate < new Date();
+  }
+
+  const etaDay = new Date(etaDate);
+  etaDay.setHours(0, 0, 0, 0);
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  return etaDay < today;
+}
 const shipments = [
   {
     id: "KAS-24081",
