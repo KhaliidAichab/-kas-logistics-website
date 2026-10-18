@@ -2399,7 +2399,13 @@ const action = /customs|clearance/.test(status)
           <span className="kpiIcon">R</span>
         </div>
         <div className="kpiValue">SAR 2.4M</div>
-        <div className="kpiChange">Design preview</div>
+        <div className="kpiChange">
+  {documentsLoading
+    ? "Loading database..."
+    : documentsError
+      ? "Database unavailable"
+      : "Live database count"}
+</div>
       </div>
 
       <div className="kpi">
