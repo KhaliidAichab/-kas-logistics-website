@@ -2261,7 +2261,13 @@ const action = /customs|clearance/.test(status)
         <div>
           <div className="cardTitle">Document Register</div>
           <div className="cardMeta">
-            Design preview only - sample records, not live data
+            
+{documentsLoading
+  ? "Loading records from database..."
+  : documentsError
+    ? "Database connection failed"
+    : "Live records from Supabase"}
+
           </div>
         </div>
         <span className="muted">Document lifecycle</span>
