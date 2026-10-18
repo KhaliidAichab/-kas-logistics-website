@@ -2279,86 +2279,67 @@ const action = /customs|clearance/.test(status)
             </tr>
           </thead>
           <tbody>
-            {[
-              {
-                id: "DOC-26107",
-                name: "Bill of Lading",
-                shipment: "KAS-26081",
-                customer: "Northstar Retail",
-                updated: "10 Oct 2026",
-                expiry: "12 Oct 2026",
-                status: "Approved",
-              },
-              {
-                id: "DOC-26106",
-                name: "Commercial Invoice",
-                shipment: "KAS-26082",
-                customer: "Eastern Gate Trading",
-                updated: "10 Oct 2026",
-                expiry: "Not applicable",
-                status: "Pending Review",
-              },
-              {
-                id: "DOC-26105",
-                name: "Air Waybill",
-                shipment: "KAS-26083",
-                customer: "BlueLine Medical",
-                updated: "09 Oct 2026",
-                expiry: "12 Oct 2026",
-                status: "Expiring Soon",
-              },
-              {
-                id: "DOC-26104",
-                name: "Packing List",
-                shipment: "KAS-26084",
-                customer: "Summit Industrial",
-                updated: "08 Oct 2026",
-                expiry: "Not applicable",
-                status: "Approved",
-              },
-              {
-                id: "DOC-26103",
-                name: "Certificate of Origin",
-                shipment: "KAS-26085",
-                customer: "Cedar Home Supply",
-                updated: "07 Oct 2026",
-                expiry: "02 Oct 2026",
-                status: "Expired",
-              },
-            ]
-              .filter((doc) =>
-                `${doc.id} ${doc.name} ${doc.shipment} ${doc.customer} ${doc.status}`
-                  .toLowerCase()
-                  .includes(search.toLowerCase())
-              )
-              .map((doc) => (
-                <tr key={doc.id}>
-                  <td>
-                    <strong>{doc.name}</strong>
-                    <div className="muted">{doc.id}</div>
-                  </td>
-                  <td>
-                    <div>{doc.shipment}</div>
-                    <div className="muted">{doc.customer}</div>
-                  </td>
-                  <td>{doc.updated}</td>
-                  <td>{doc.expiry}</td>
-                  <td>
-                    <span
-                      className={`status ${
-                        doc.status === "Approved"
-                          ? "onTime"
-                          : doc.status === "Expired" ||
-                            doc.status === "Expiring Soon"
-                          ? "delayed"
-                          : "transit"
-                      }`}
-                    >
-                      {doc.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
+          
+{documentsLoading ? (
+  <tr>
+    <td colSpan={5}>Loading documents...</td>
+  </tr>
+) : documentsError ? (
+  <tr>
+    <td colSpan={5}>{documentsError}</td>
+  </tr>
+) : liveDocuments.length === 0 ? (
+  <tr>
+    <td colSpan={5}>
+      No documents found in the database.
+    </td>
+  </tr>
+) : (
+  liveDocuments.map((doc) => {
+    const formatDate = (value) => {
+      if (!value) return "—";
+
+      const date = new Date(
+        /^\d{4}-\d{2}-\d{2}$/.test(value)
+          ? `${value}T00:00:00`
+          : value
+      );
+
+      if (Number.isNaN(date.getTime())) return "—";
+
+      return date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      });
+    };
+
+    return (
+      <tr key={doc.id || doc.document_number}>
+        <td>
+          <strong>{doc.document_type || "Document"}</strong>
+          <div className="muted">
+            {doc.document_number || "—"}
+          </div>
+        </td>
+        <td>
+          {doc.shipment_id || "—"}
+          <div className="muted">
+            {doc.customer_name || "—"}
+          </div>
+        </td>
+        <td>
+          {formatDate(
+            doc.updated_at || doc.created_at || doc.issue_date
+          )}
+        </td>
+        <td>{formatDate(doc.expiry_date)}</td>
+        <td>{doc.status || "Pending"}</td>
+      </tr>
+    );
+  })
+)}
+
           </tbody>
         </table>
       </div>
