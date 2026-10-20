@@ -1994,7 +1994,11 @@ onClick={() => {
           <span className="kpiIcon">A</span>
         </div>
         <div className="kpiValue">{liveShipments.filter((s) => !["delivered", "cancelled", "canceled"].includes(String(s.status || "").trim().toLowerCase())).length}</div>
-        <div className="kpiChange">Design preview</div>
+        <div className="kpiChange">
+  {liveShipments.length > 0
+    ? "Live data from Supabase"
+    : "No shipment records"}
+</div>
       </div>
 
       <div className="kpi">
