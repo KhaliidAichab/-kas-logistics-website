@@ -2045,7 +2045,7 @@ onClick={() => {
         <div>
           <div className="cardTitle">Shipment Control Tower</div>
           <div className="cardMeta">
-            Shipment records loaded from CRM
+            Test shipment data — pre-launch environment
           </div>
         </div>
         <span className="muted">Operational overview</span>
