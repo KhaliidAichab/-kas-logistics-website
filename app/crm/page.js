@@ -1996,7 +1996,7 @@ onClick={() => {
         <div className="kpiValue">{liveShipments.filter((s) => !["delivered", "cancelled", "canceled"].includes(String(s.status || "").trim().toLowerCase())).length}</div>
         <div className="kpiChange">
   {liveShipments.length > 0
-    ? "Live data from Supabase"
+    ? "Test data from Supabase"
     : "No shipment records"}
 </div>
       </div>
@@ -2009,7 +2009,7 @@ onClick={() => {
         <div className="kpiValue">{liveShipments.filter((s) => ["in transit", "transit"].includes(String(s.status || "").trim().toLowerCase())).length}</div>
         <div className="kpiChange">
   {liveShipments.length > 0
-    ? "Live data from Supabase"
+    ? "Test data from Supabase"
     : "No shipment records"}
 </div>
       </div>
@@ -2027,7 +2027,7 @@ onClick={() => {
   return /delayed|delay|at risk|overdue|exception/.test(status) ||
     (isOverdue && !["delivered", "cancelled", "canceled"].includes(status));
 }).length}</div>
-        <div className="kpiChange">Requires attention</div>
+        <div className="kpiChange">Test data — review status</div>
       </div>
 
       <div className="kpi">
@@ -2036,7 +2036,7 @@ onClick={() => {
           <span className="kpiIcon">D</span>
         </div>
         <div className="kpiValue">{liveShipments.filter((s) => String(s.status || "").trim().toLowerCase() === "delivered").length}</div>
-        <div className="kpiChange">Design preview</div>
+        <div className="kpiChange">Test data from Supabase</div>
       </div>
     </section>
 
