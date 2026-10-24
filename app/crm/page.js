@@ -26,31 +26,97 @@ function isOperationalException(shipment) {
 
   const etaText = String(shipment?.eta || "").trim();
 
-  if (
-    !etaText ||
-    etaText === "—" ||
-    /\b(today|tomorrow|yesterday)\b/i.test(etaText) ||
-    !/\b20\d{2}\b/.test(etaText)
-  ) {
+  if (!etaText || etaText === "-" || etaText === "—") {
     return false;
   }
 
-  const etaDate = new Date(etaText);
+  const now = new Date();
+  let etaDate;
+  let hasExplicitTime = false;
+
+  const relativeMatch = etaText.match(
+    /^(today|tomorrow|yesterday)(?:,\s*(\d{1,2}):(\d{2}))?$/i
+  );
+
+  if (relativeMatch) {
+    etaDate = new Date(now);
+    etaDate.setHours(0, 0, 0, 0);
+
+    const relativeDay = relativeMatch[1].toLowerCase();
+
+    if (relativeDay === "tomorrow") {
+      etaDate.setDate(etaDate.getDate() + 1);
+    } else if (relativeDay === "yesterday") {
+      etaDate.setDate(etaDate.getDate() - 1);
+    }
+
+    if (relativeMatch[2] && relativeMatch[3]) {
+      const hours = Number(relativeMatch[2]);
+      const minutes = Number(relativeMatch[3]);
+
+      if (hours > 23 || minutes > 59) {
+        return false;
+      }
+
+      etaDate.setHours(hours, minutes, 0, 0);
+      hasExplicitTime = true;
+    }
+  } else {
+    const dayMonthMatch = etaText.match(
+      /^(\d{1,2})\s+([A-Za-z]{3,9})(?:,?\s+(\d{4}))?$/
+    );
+
+    if (dayMonthMatch) {
+      const months = {
+        jan: 0, feb: 1, mar: 2, apr: 3,
+        may: 4, jun: 5, jul: 6, aug: 7,
+        sep: 8, oct: 9, nov: 10, dec: 11,
+      };
+
+      const monthKey = dayMonthMatch[2].slice(0, 3).toLowerCase();
+      const month = months[monthKey];
+
+      if (month === undefined) {
+        return false;
+      }
+
+      const day = Number(dayMonthMatch[1]);
+      const year = dayMonthMatch[3]
+        ? Number(dayMonthMatch[3])
+        : now.getFullYear();
+
+      etaDate = new Date(year, month, day);
+
+      if (
+        etaDate.getFullYear() !== year ||
+        etaDate.getMonth() !== month ||
+        etaDate.getDate() !== day
+      ) {
+        return false;
+      }
+    } else {
+      etaDate = new Date(etaText);
+
+      if (Number.isNaN(etaDate.getTime())) {
+        return false;
+      }
+
+      hasExplicitTime = /(?:T|\s)\d{1,2}:\d{2}/i.test(etaText);
+    }
+  }
 
   if (Number.isNaN(etaDate.getTime())) {
     return false;
   }
 
-  const hasTime = /(?:T|\s)\d{1,2}:\d{2}/i.test(etaText);
-
-  if (hasTime) {
-    return etaDate < new Date();
+  if (hasExplicitTime) {
+    return etaDate < now;
   }
 
   const etaDay = new Date(etaDate);
   etaDay.setHours(0, 0, 0, 0);
 
-  const today = new Date();
+  const today = new Date(now);
   today.setHours(0, 0, 0, 0);
 
   return etaDay < today;
